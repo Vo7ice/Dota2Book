@@ -10,7 +10,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-import com.cn.guojinhu.dota2book.Base.BaseActivity;
+import com.cn.guojinhu.dota2book.base.BaseActivity;
 import com.cn.guojinhu.dota2book.R;
 import com.cn.guojinhu.dota2book.ui.news.NewsFragment;
 
@@ -140,6 +140,7 @@ public class MainActivity extends BaseActivity
     public void switch2News() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.content_main, new NewsFragment(), getResources().getString(R.string.tag_news));
+        ft.commit();
         mToolbar.setTitle(R.string.tag_news);
     }
 
