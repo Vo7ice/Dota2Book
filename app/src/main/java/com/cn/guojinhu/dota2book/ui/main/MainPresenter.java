@@ -1,5 +1,9 @@
 package com.cn.guojinhu.dota2book.ui.main;
 
+import android.view.MenuItem;
+
+import com.cn.guojinhu.dota2book.R;
+
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
@@ -22,5 +26,17 @@ public class MainPresenter implements MainContract.Presenter {
 
     @Override
     public void start() {
+        mMainView.switch2News();
+    }
+
+    @Override
+    public void manageFragment(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.nav_camera:
+                mMainView.switch2News();
+                break;
+        }
+        item.setChecked(true);
+        mMainView.closeDrawerIfNeeded();
     }
 }
