@@ -1,5 +1,7 @@
 package com.cn.guojinhu.dota2book.ui.main;
 
+import android.view.MenuItem;
+
 import com.cn.guojinhu.dota2book.Base.BasePresenter;
 import com.cn.guojinhu.dota2book.Base.BaseView;
 
@@ -10,11 +12,14 @@ import com.cn.guojinhu.dota2book.Base.BaseView;
 public class MainContract {
 
     public interface View extends BaseView<Presenter> {
+        boolean IsDrawerOpened();
+        void switch2News();
 
+        void closeDrawerIfNeeded();
     }
 
     public interface Presenter extends BasePresenter {
-
+        void manageFragment(MenuItem item);
     }
 
 }

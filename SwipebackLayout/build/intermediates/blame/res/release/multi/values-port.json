@@ -1,6 +1,6 @@
 [
     {
-        "outputFile": "D:\\Git\\JuheNews\\SwipebackLayout\\build\\intermediates\\res\\merged\\release\\values-port\\values-port.xml",
+        "outputFile": "D:\\Git\\Dota2Book\\SwipebackLayout\\build\\intermediates\\incremental\\mergeReleaseResources\\merged.dir\\values-port\\values-port.xml",
         "map": [
             {
                 "to": {
@@ -11,31 +11,7 @@
                     "endOffset": 106
                 },
                 "from": {
-                    "file": "D:\\Git\\JuheNews\\SwipebackLayout\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\22.2.0\\res\\values-port\\values-port.xml",
-                    "position": {
-                        "startLine": 4,
-                        "startColumn": 4,
-                        "startOffset": 291,
-                        "endColumn": 55,
-                        "endOffset": 342
-                    }
-                }
-            }
-        ]
-    },
-    {
-        "outputFile": "D:\\Users\\mac\\Desktop\\develop\\workspace\\MyApplication\\SwipebackLayout\\build\\intermediates\\res\\merged\\release\\values-port\\values-port.xml",
-        "map": [
-            {
-                "to": {
-                    "startLine": 2,
-                    "startColumn": 4,
-                    "startOffset": 55,
-                    "endColumn": 55,
-                    "endOffset": 106
-                },
-                "from": {
-                    "file": "D:\\Users\\mac\\Desktop\\develop\\workspace\\MyApplication\\SwipebackLayout\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\22.2.0\\res\\values-port\\values-port.xml",
+                    "file": "D:\\Git\\Dota2Book\\SwipebackLayout\\build\\intermediates\\exploded-aar\\com.android.support\\appcompat-v7\\22.2.0\\res\\values-port\\values-port.xml",
                     "position": {
                         "startLine": 4,
                         "startColumn": 4,

@@ -2,6 +2,7 @@ package com.cn.guojinhu.dota2book.ui.main;
 
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -10,8 +11,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import com.cn.guojinhu.dota2book.Base.BaseActivity;
-import com.cn.guojinhu.dota2book.Base.BasePresenter;
 import com.cn.guojinhu.dota2book.R;
+import com.cn.guojinhu.dota2book.ui.news.NewsFragment;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -20,7 +21,7 @@ public class MainActivity extends BaseActivity
 
     private Toolbar mToolbar;
     private DrawerLayout mDrawerLayout;
-    private ActionBarDrawerToggle mToggle;
+    private ActionBarDrawerToggle mDrawerToggle;
     private NavigationView mNavigationView;
 
     private MainPresenter mMainPresenter;
@@ -55,6 +56,12 @@ public class MainActivity extends BaseActivity
     }
 
     @Override
+    protected void onResume() {
+        super.onResume();
+        mMainPresenter.start();
+    }
+
+    @Override
     public void initViews() {
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mToolbar = (Toolbar) findViewById(R.id.toolbar);
@@ -70,9 +77,12 @@ public class MainActivity extends BaseActivity
     public void initData() {
         disableSwipeBack();
         setSupportActionBar(mToolbar);
-        mToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar,
+        //该方法会自动和actionBar关联, 将开关的图片显示在了action上，如果不设置，也可以有抽屉的效果，不过是默认的图标
+        //mDrawerToggle与mDrawerLayout的打开状态同步
+        mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, mToolbar,
                 R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        mToggle.syncState();
+        mDrawerToggle.syncState();
+        mDrawerLayout.addDrawerListener(mDrawerToggle);
     }
 
 
@@ -112,29 +122,31 @@ public class MainActivity extends BaseActivity
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
-        int id = item.getItemId();
-
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
-
-        } else if (id == R.id.nav_slideshow) {
-
-        } else if (id == R.id.nav_manage) {
-
-        } else if (id == R.id.nav_share) {
-
-        } else if (id == R.id.nav_send) {
-
-        }
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
+        mMainPresenter.manageFragment(item);
         return true;
     }
 
     @Override
     public void setPresenter(MainContract.Presenter p) {
         mMainPresenter = (MainPresenter) checkNotNull(p);
+    }
+
+    @Override
+    public boolean IsDrawerOpened() {
+        return mDrawerLayout.isDrawerOpen(GravityCompat.START);
+    }
+
+    @Override
+    public void switch2News() {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.content_main, new NewsFragment(), getResources().getString(R.string.tag_news));
+        mToolbar.setTitle(R.string.tag_news);
+    }
+
+    @Override
+    public void closeDrawerIfNeeded() {
+        if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
+            mDrawerLayout.closeDrawer(GravityCompat.START);
+        }
     }
 }
