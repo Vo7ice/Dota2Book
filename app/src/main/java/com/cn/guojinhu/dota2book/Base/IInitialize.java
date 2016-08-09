@@ -1,4 +1,4 @@
-package com.cn.guojinhu.dota2book.Base;
+package com.cn.guojinhu.dota2book.base;
 
 /**
  * Created by guojin.hu on 2016/8/3.

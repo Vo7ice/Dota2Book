@@ -1,4 +1,4 @@
-package com.cn.guojinhu.dota2book.Base;
+package com.cn.guojinhu.dota2book.base;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;

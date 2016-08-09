@@ -15,7 +15,12 @@ import retrofit.RxJavaCallAdapterFactory;
 public class ServiceGenerator {
 
     public static <S> S createService(Class<S> serviceClass) {
-        Retrofit retrofit = Builder(Apis.PROTOCAL).client(new OkHttpClient()).build();
+        Retrofit retrofit = Builder(Apis.HOST_TYPE0).client(new OkHttpClient()).build();
+        return retrofit.create(serviceClass);
+    }
+
+    public static <S> S createService(Class<S> serviceClass, String url) {
+        Retrofit retrofit = Builder(url).client(new OkHttpClient()).build();
         return retrofit.create(serviceClass);
     }
 
