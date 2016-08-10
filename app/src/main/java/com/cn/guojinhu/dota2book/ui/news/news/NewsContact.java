@@ -4,6 +4,7 @@ import com.cn.guojinhu.dota2book.base.BaseFragment;
 import com.cn.guojinhu.dota2book.base.BasePresenter;
 import com.cn.guojinhu.dota2book.base.BaseView;
 import com.cn.guojinhu.dota2book.bean.Channel;
+import com.cn.guojinhu.dota2book.bean.NewsBean;
 import com.cn.guojinhu.dota2book.ui.main.MainContract;
 
 import java.util.List;
@@ -30,7 +31,11 @@ public class NewsContact {
     public interface ViewList extends BaseView<Presenter> {
 
         void showProgress();
+
         void hideProgress();
 
+        void refreshUI(List<NewsBean.News> mNewsList);
+
+        void showErrorMessage();
     }
 }

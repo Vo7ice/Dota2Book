@@ -72,11 +72,9 @@ public class NewsFragment extends BaseFragment implements NewsContact.View {
 
         for (String title : fragmentTitles) {
             mTabLayout.addTab(mTabLayout.newTab().setText(title));
-            //Log.d("Vo7ice", "tabs-->" + mTabLayout.getTabCount());
         }
         //先添加tab后更新数据,不然tab数量会增多
         mAdapter.replaceData(fragments, fragmentTitles);
-        //Log.d("Vo7ice", "fragmentTitles-->"+fragmentTitles.size()+",tabs-->" + mTabLayout.getTabCount());
-        //mViewPager.setOffscreenPageLimit(fragments.size() - 1);
+        mViewPager.setOffscreenPageLimit(fragments.size() - 1);
     }
 }

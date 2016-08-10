@@ -11,7 +11,7 @@ import java.util.Map;
 
 public class ChannelSettings {
 
-    private static Map<String, Channel> mChannels = new HashMap<>();
+    private static List<Channel> mChannels = new ArrayList<>();
 
     public static final String TAB_HEADLINE = "headline";
     public static final String TAB_ENT = "ent";
@@ -20,19 +20,19 @@ public class ChannelSettings {
     public static final String TAB_GAME = "game";
 
     static {
-        mChannels.put(TAB_HEADLINE, new Channel("T1348647909107", "头条", 2,
+        mChannels.add(new Channel("T1348647909107", "头条", 2,
                 "http://c.3g.163.com/nc/article/headline/T1348647909107/0-20.html", ""));
-        mChannels.put(TAB_ENT, new Channel("T1348648517839", "娱乐", 1,
+        mChannels.add(new Channel("T1348648517839", "娱乐", 1,
                 "http://c.3g.163.com/nc/article/list/T1348648517839/0-20.html", ""));
-        mChannels.put(TAB_SPORTS, new Channel("T1348649079062", "体育", 1,
+        mChannels.add(new Channel("T1348649079062", "体育", 1,
                 "http://c.3g.163.com/nc/article/list/T1348649079062/0-20.html", ""));
-        mChannels.put(TAB_TECH, new Channel("T1348649580692", "科技", 0,
+        mChannels.add(new Channel("T1348649580692", "科技", 0,
                 "http://c.m.163.com/nc/article/list/T1348649580692/0-20.html", ""));
-        mChannels.put(TAB_GAME, new Channel("T1348654151579", "游戏", 0,
+        mChannels.add(new Channel("T1348654151579", "游戏", 0,
                 "http://c.m.163.com/nc/article/list/T1348654151579/0-20.html", ""));
     }
 
-    public static Map<String, Channel> getChannels() {
+    public static List<Channel> getChannels() {
         return mChannels;
     }
 
