@@ -19,7 +19,7 @@ public interface INewsService {
 
     @GET("{channelId}/{start}-{end}.html")
     Call<ResponseBody> getNewsList(@Path("channelId") String channelId,
-                                   @Path("start") int start,
-                                   @Path("end") int end);
+                                          @Path("start") int start,
+                                          @Path("end") int end);
 
 }

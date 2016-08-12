@@ -1,16 +1,22 @@
 package com.cn.guojinhu.dota2book.ui.news.newslist;
 
 import android.os.Bundle;
-import android.os.Parcelable;
+import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 
 import com.cn.guojinhu.dota2book.R;
 import com.cn.guojinhu.dota2book.base.BaseFragment;
 import com.cn.guojinhu.dota2book.bean.Channel;
+import com.cn.guojinhu.dota2book.bean.NewsBean;
 import com.cn.guojinhu.dota2book.ui.news.news.NewsContact;
 import com.cn.guojinhu.dota2book.ui.news.news.NewsPresenter;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -24,6 +30,7 @@ public class NewsListFragment extends BaseFragment implements NewsContact.ViewLi
 
     private SwipeRefreshLayout mSwipeRefreshLayout;
     private RecyclerView mRecyclerView;
+    private NewsListAdapter mAdapter;
     private NewsPresenter mPresenter;
     private int pageIndex = 0;
 
@@ -54,10 +61,17 @@ public class NewsListFragment extends BaseFragment implements NewsContact.ViewLi
 
     @Override
     public void initData() {
-        Channel mChannel = getArguments().getParcelable(KEY_CHANNEL);
+        Channel channel = getArguments().getParcelable(KEY_CHANNEL);
+        mSwipeRefreshLayout.setColorSchemeResources(R.color.colorAccent, R.color.colorPrimary, R.color.colorPrimaryDark);
+
+        mAdapter = new NewsListAdapter(new ArrayList<NewsBean.News>(), getActivity());
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+        mRecyclerView.setAdapter(mAdapter);
+        mRecyclerView.setItemAnimator(new DefaultItemAnimator());
+
 
         mPresenter = new NewsPresenter(this);
-        mPresenter.loadNewsList(mChannel, pageIndex);
+        mPresenter.loadNewsList(channel, pageIndex);
     }
 
     @Override
@@ -73,5 +87,15 @@ public class NewsListFragment extends BaseFragment implements NewsContact.ViewLi
     @Override
     public void hideProgress() {
         mSwipeRefreshLayout.setRefreshing(false);
+    }
+
+    @Override
+    public void refreshUI(List<NewsBean.News> mNewsList) {
+        mAdapter.replaceData(mNewsList);
+    }
+
+    @Override
+    public void showErrorMessage() {
+        Snackbar.make(getRootView(), R.string.network_error, Snackbar.LENGTH_LONG).show();
     }
 }
