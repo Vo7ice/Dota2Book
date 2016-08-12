@@ -4,6 +4,7 @@ import com.cn.guojinhu.dota2book.base.BaseFragment;
 import com.cn.guojinhu.dota2book.base.BasePresenter;
 import com.cn.guojinhu.dota2book.base.BaseView;
 import com.cn.guojinhu.dota2book.bean.Channel;
+import com.cn.guojinhu.dota2book.bean.News;
 import com.cn.guojinhu.dota2book.bean.NewsBean;
 import com.cn.guojinhu.dota2book.ui.main.MainContract;
 
@@ -34,8 +35,9 @@ public class NewsContact {
 
         void hideProgress();
 
-        void refreshUI(List<NewsBean.News> mNewsList);
+        void refreshUI(List<News> mNewsList);
 
         void showErrorMessage();
+
     }
 }

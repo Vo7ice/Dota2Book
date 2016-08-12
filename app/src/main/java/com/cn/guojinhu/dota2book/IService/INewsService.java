@@ -18,8 +18,13 @@ import rx.Observable;
 public interface INewsService {
 
     @GET("{channelId}/{start}-{end}.html")
-    Call<ResponseBody> getNewsList(@Path("channelId") String channelId,
+    Observable<NewsBean> getNewsList(@Path("channelId") String channelId,
                                           @Path("start") int start,
                                           @Path("end") int end);
+
+    @GET("{channelId}/{start}-{end}.html")
+    Call<ResponseBody> getNewsList2(@Path("channelId") String channelId,
+                                     @Path("start") int start,
+                                     @Path("end") int end);
 
 }

@@ -4,11 +4,13 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
+    android:clickable="true"
     android:descendantFocusability="blocksDescendants"
     android:elevation="5dp"
+    android:foreground="?attr/selectableItemBackground"
     app:cardCornerRadius="5dp"
     app:cardElevation="3dp"
-    app:contentPadding="5dp">
+    app:contentPadding="3dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -16,12 +18,13 @@
 
         <ImageView
             android:id="@+id/image_news_list"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
             android:layout_centerVertical="true"
             android:contentDescription="@string/news_list_img"
-            android:padding="3dp"
-            android:src="@mipmap/ic_launcher" />
+            android:paddingEnd="5dp"
+            android:paddingStart="5dp"
+            android:src="@drawable/ic_photo_size_select_actual_black_24dp" />
 
         <TextView
             android:id="@+id/text_news_list_title"
@@ -34,9 +37,10 @@
             android:layout_toEndOf="@id/image_news_list"
             android:ellipsize="end"
             android:maxLines="1"
+            android:paddingTop="3dp"
+            android:text="江苏连云港人民政府:暂停核循环项目选址前期工作"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
-            android:textSize="15sp"
-            android:text="江苏连云港人民政府:暂停核循环项目选址前期工作"/>
+            android:textSize="15sp" />
 
         <TextView
             android:id="@+id/text_news_list_digest"
@@ -50,9 +54,9 @@
             android:layout_toEndOf="@id/image_news_list"
             android:ellipsize="end"
             android:maxLines="2"
+            android:text="8月10日凌晨1时36分，连云港市人民政府官方微博发布消息，连云港市人民政府决定：暂停核循环项目选址前期工作。新闻回顾：连云港市人民政府官方微博消息，8月7日晚"
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
-            android:textSize="12sp"
-            android:text="8月10日凌晨1时36分，连云港市人民政府官方微博发布消息，连云港市人民政府决定：暂停核循环项目选址前期工作。新闻回顾：连云港市人民政府官方微博消息，8月7日晚"/>
+            android:textSize="12sp" />
     </RelativeLayout>
 
 </android.support.v7.widget.CardView>

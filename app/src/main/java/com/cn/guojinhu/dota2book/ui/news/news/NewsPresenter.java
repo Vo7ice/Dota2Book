@@ -6,6 +6,7 @@ import com.cn.guojinhu.dota2book.IService.INewsService;
 import com.cn.guojinhu.dota2book.base.BaseFragment;
 import com.cn.guojinhu.dota2book.bean.Channel;
 import com.cn.guojinhu.dota2book.bean.ChannelSettings;
+import com.cn.guojinhu.dota2book.bean.News;
 import com.cn.guojinhu.dota2book.bean.NewsBean;
 import com.cn.guojinhu.dota2book.commons.Apis;
 import com.cn.guojinhu.dota2book.ui.news.newslist.NewsListFragment;
@@ -75,6 +76,7 @@ public class NewsPresenter implements NewsContact.Presenter {
 
     @Override
     public void loadNewsList(Channel channel, int pageIndex) {
+        Log.d("Vo7ice", "channelId:" + channel.channelId + ",page:" + pageIndex + ",category:" + channel.category);
         mNewsListView.showProgress();
         switch (channel.category) {
             case TYPEM:
@@ -97,8 +99,8 @@ public class NewsPresenter implements NewsContact.Presenter {
      * @param channel   channel
      * @param pageIndex default 0
      */
-    private void getNewsList(Channel channel, int pageIndex) {
-        /*service.getNewsList(channel.channelId, pageIndex, (pageIndex + 1) * PAGE_SIZE)
+    private void getNewsList(final Channel channel, int pageIndex) {
+        service.getNewsList(channel.channelId, pageIndex * PAGE_SIZE, PAGE_SIZE)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Subscriber<NewsBean>() {
@@ -110,30 +112,38 @@ public class NewsPresenter implements NewsContact.Presenter {
 
                     @Override
                     public void onError(Throwable e) {
-                        Log.d("Vo7ice", "NewsPresenter:onError");
+                        Log.d("Vo7ice", "NewsPresenter:onError:" + e.getMessage());
                         mNewsListView.hideProgress();
                         mNewsListView.showErrorMessage();
                     }
 
                     @Override
-                    public void onNext(NewsBean newsBeen) {
+                    public void onNext(NewsBean newsBean) {
                         Log.d("Vo7ice", "NewsPresenter:onNext");
-                        mNewsListView.refreshUI(newsBeen.mNewsList);
+                        mNewsListView.refreshUI(getRightNews(newsBean, channel));
                     }
-                });*/
-        service.getNewsList(channel.channelId, pageIndex, (pageIndex + 1) * PAGE_SIZE)
+                });
+        /*service.getNewsList2(channel.channelId, pageIndex * PAGE_SIZE, PAGE_SIZE)
                 .enqueue(new Callback<ResponseBody>() {
                     @Override
                     public void onResponse(Response<ResponseBody> response, Retrofit retrofit) {
                         Gson mGson = new Gson();
                         try {
                             String string = response.body().string();
-                            Log.d("Vo7ice","source:"+string);
+                            Log.d("Vo7ice", "source:" + string);
                             NewsBean newsBean = mGson.fromJson(string, NewsBean.class);
-                            Log.d("Vo7ice", "newsBean:size-->" + newsBean.mNewsList.size());
+                            Log.d("Vo7ice", "mEntNews:size-->" + newsBean.mEntNews.size()
+                                    + ",mGameNews,-->" + newsBean.mGameNews.size()
+                                    + ",mHeadLineNews-->" + newsBean.mHeadLineNews.size()
+                                    + ",mSportsNews-->" + newsBean.mSportsNews.size()
+                                    + ",mTechNews-->" + newsBean.mTechNews.size());
+                            mNewsListView.refreshUI(getRightNews(newsBean, channel));
                         } catch (IOException e) {
                             e.printStackTrace();
+                        } catch (NullPointerException ignored) {
+                            Log.e("Vo7ice", response.raw().request().urlString());
                         }
+
                         //mNewsListView.refreshUI(news.mNewsList);
                     }
 
@@ -141,6 +151,28 @@ public class NewsPresenter implements NewsContact.Presenter {
                     public void onFailure(Throwable t) {
                         Log.d("Vo7ice", "onFailure-->" + t.getMessage());
                     }
-                });
+                });*/
+    }
+
+    private List<News> getRightNews(NewsBean newsBean, Channel channel) {
+        List<News> target = new ArrayList<>();
+        switch (channel.channelId) {
+            case "T1348647909107":
+                target = newsBean.mHeadLineNews;
+                break;
+            case "T1348648517839":
+                target = newsBean.mEntNews;
+                break;
+            case "T1348649079062":
+                target = newsBean.mSportsNews;
+                break;
+            case "T1348649580692":
+                target = newsBean.mTechNews;
+                break;
+            case "T1348654151579":
+                target = newsBean.mGameNews;
+                break;
+        }
+        return target;
     }
 }

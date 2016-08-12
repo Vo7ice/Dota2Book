@@ -2,6 +2,7 @@ package com.cn.guojinhu.dota2book.ui.news.news;
 
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.View;
 
 import com.cn.guojinhu.dota2book.base.BaseFragment;
@@ -50,6 +51,7 @@ public class NewsFragment extends BaseFragment implements NewsContact.View {
         mViewPager.setAdapter(mAdapter);
         mTabLayout.setupWithViewPager(mViewPager);
 
+
         mPresenter = new NewsPresenter(this);
         mPresenter.loadChannel();
     }
@@ -69,7 +71,7 @@ public class NewsFragment extends BaseFragment implements NewsContact.View {
         mAdapter.clear();
         mTabLayout.removeAllTabs();
 
-
+        Log.d("Vo7ice","size-->"+fragments.size());
         for (String title : fragmentTitles) {
             mTabLayout.addTab(mTabLayout.newTab().setText(title));
         }
