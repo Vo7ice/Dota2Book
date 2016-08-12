@@ -14,7 +14,7 @@ public class NewsBean {
 
     public class News {
 
-       public static final int NORMAL_TYPE = 0;
+        public static final int NORMAL_TYPE = 0;
         public static final int PHOTO_TYPE = 1;
 
         public static final String PHOTO_PATH = "http://c.m.163.com/photo/api/set/";
@@ -71,9 +71,9 @@ public class NewsBean {
                     break;
                 case PHOTO_TYPE:
                     int start = photosetId.indexOf("|");
-                    String target = photosetId.substring(start-4);
-                    target = target.replace("|","/");
-                    detailUrl = PHOTO_PATH+target+".json";
+                    String target = photosetId.substring(start - 4);
+                    target = target.replace("|", "/");
+                    detailUrl = PHOTO_PATH + target + ".json";
                     break;
             }
             return detailUrl;
