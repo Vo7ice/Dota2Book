@@ -1,8 +1,11 @@
 package com.cn.guojinhu.dota2book.ui.news.newslist;
 
 import android.content.Context;
+import android.support.v4.view.PagerAdapter;
+import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -30,6 +33,9 @@ public class NewsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private static final int PHOTO_SET = 1;
     private static final int ADS = 2;
 
+    private int startX = -1;
+    private int endX;
+
     public NewsListAdapter(List<News> newsList, Context context) {
         this.mNewsList = newsList;
         this.mContext = context;
@@ -37,7 +43,7 @@ public class NewsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        RecyclerView.ViewHolder holder = null;
+        RecyclerView.ViewHolder holder;
         switch (viewType) {
             case NORMAL:
                 holder = new NewsListHolder(LayoutInflater.from(mContext)
@@ -46,6 +52,10 @@ public class NewsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             case PHOTO_SET:
                 holder = new PhotoSetHolder(LayoutInflater.from(mContext)
                         .inflate(R.layout.item_news_list_photoset, parent, false));
+                break;
+            case ADS:
+                holder = new AdsHolder(LayoutInflater.from(mContext)
+                        .inflate(R.layout.item_news_list_ads, parent, false));
                 break;
             default:
                 holder = new NewsListHolder(LayoutInflater.from(mContext)
@@ -66,8 +76,39 @@ public class NewsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         } else if (viewHolder instanceof PhotoSetHolder) {
             final PhotoSetHolder holder = (PhotoSetHolder) viewHolder;
             holder.text_news_list_title.setText(news.title);
-            BitmapUtils.display(mContext,holder.imageExtra0,news.imgsrc);
+            BitmapUtils.display(mContext, holder.imageExtra0, news.imgsrc);
             BitmapUtils.display(mContext, holder.imageExtra1, news.mImgExtraList.get(0).imgsrc);
+            BitmapUtils.display(mContext, holder.imageExtra2, news.mImgExtraList.get(1).imgsrc);
+        } else if (viewHolder instanceof AdsHolder) {
+            final AdsHolder holder = (AdsHolder) viewHolder;
+            holder.viewPagerAds.setAdapter(new AdsAdapter(news, mContext));
+            holder.viewPagerAds.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View view, MotionEvent motionEvent) {
+                    switch (motionEvent.getAction()) {
+                        case MotionEvent.ACTION_DOWN:
+                            if (startX == -1) {
+                                startX = (int) motionEvent.getX();
+                            }
+                            break;
+                        case MotionEvent.ACTION_MOVE:
+                            endX = (int) motionEvent.getX();
+                            int deltaX = endX - startX;
+                            if (deltaX > 0) {//往右移动
+                                if (holder.viewPagerAds.getCurrentItem() == (holder.viewPagerAds.getAdapter().getCount() - 1)) {
+                                    holder.viewPagerAds.setCurrentItem(0);
+                                    return true;
+                                }
+                            }
+                            break;
+                        case MotionEvent.ACTION_UP:
+                        case MotionEvent.ACTION_CANCEL:
+                            startX = -1;
+                            break;
+                    }
+                    return false;
+                }
+            });
         }
     }
 
@@ -108,12 +149,53 @@ public class NewsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         notifyDataSetChanged();
     }
 
+    private class AdsAdapter extends PagerAdapter {
 
-    public static class NewsListHolder extends RecyclerView.ViewHolder {
+        private News news;
+        private Context context;
+
+        public AdsAdapter(News news, Context context) {
+            this.news = news;
+            this.context = context;
+        }
+
+        @Override
+        public int getCount() {
+            return news.mAdList.size() + 1;
+        }
+
+        @Override
+        public boolean isViewFromObject(View view, Object object) {
+            return view == object;
+        }
+
+        @Override
+        public Object instantiateItem(ViewGroup container, int position) {
+            View view = LayoutInflater.from(context).inflate(R.layout.item_ads, container, false);
+            ImageView image_pic = (ImageView) view.findViewById(R.id.image_pic);
+            TextView text_ads_title = (TextView) view.findViewById(R.id.text_ads_title);
+            if (position == 0) {
+                BitmapUtils.display(context, image_pic, news.imgsrc);
+                text_ads_title.setText(news.title);
+            } else {
+                BitmapUtils.display(context, image_pic, news.mAdList.get(position - 1).imgsrc);
+                text_ads_title.setText(news.mAdList.get(position - 1).title);
+            }
+            container.addView(view);
+            return view;
+        }
+
+        @Override
+        public void destroyItem(ViewGroup container, int position, Object object) {
+            container.removeView((View) object);
+        }
+    }
+
+    private static class NewsListHolder extends RecyclerView.ViewHolder {
         private ImageView image_news_list;
         private TextView text_news_list_title, text_news_list_digest;
 
-        public NewsListHolder(View itemView) {
+        NewsListHolder(View itemView) {
             super(itemView);
             image_news_list = (ImageView) itemView.findViewById(R.id.image_news_list);
             text_news_list_digest = (TextView) itemView.findViewById(R.id.text_news_list_digest);
@@ -121,23 +203,26 @@ public class NewsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         }
     }
 
-    public static class PhotoSetHolder extends RecyclerView.ViewHolder {
-        private ImageView imageExtra0, imageExtra1;
+    private static class PhotoSetHolder extends RecyclerView.ViewHolder {
+        private ImageView imageExtra0, imageExtra1, imageExtra2;
         private TextView text_news_list_title;
 
-        public PhotoSetHolder(View itemView) {
+        PhotoSetHolder(View itemView) {
             super(itemView);
             imageExtra0 = (ImageView) itemView.findViewById(R.id.image_extra0);
             imageExtra1 = (ImageView) itemView.findViewById(R.id.image_extra1);
+            imageExtra2 = (ImageView) itemView.findViewById(R.id.image_extra2);
             text_news_list_title = (TextView) itemView.findViewById(R.id.text_news_list_title);
         }
     }
 
-    public static class AdsHolder extends RecyclerView.ViewHolder {
+    private static class AdsHolder extends RecyclerView.ViewHolder {
 
-        public AdsHolder(View itemView) {
+        private ViewPager viewPagerAds;
+
+        AdsHolder(View itemView) {
             super(itemView);
-
+            viewPagerAds = (ViewPager) itemView.findViewById(R.id.viewpager_ads);
         }
     }
 
