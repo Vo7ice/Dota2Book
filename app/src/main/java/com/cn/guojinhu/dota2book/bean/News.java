@@ -19,14 +19,14 @@ public class News {
     public static final String PHOTO_PATH = "http://c.m.163.com/photo/api/set/";
     public static final String BASE_PATH = "http://c.m.163.com/nc/article/";
     @SerializedName("ads")
-    public List<News.Ads> mAdList = new ArrayList<>();//广告
+    public List<Ads> mAdList = new ArrayList<>();//广告
     public String alias;//别称
     public String boardid;//板块名字
     public String cid;
     public String digest;
     public String docid;//详情显示页面
     @SerializedName("imgextra")
-    public List<News.ImgExtra> mImgExtraList = new ArrayList<>();//图片
+    public List<ImgExtra> mImgExtraList = new ArrayList<>();//图片
     public String ename;
     public int hasAD;//是否有广告
     public boolean hasCover;//是否
@@ -53,16 +53,16 @@ public class News {
 
     private String detailUrl;//详情页url
 
-    public static class Ads {
+    public class ImgExtra {
+        public String imgsrc;//图片url
+    }
+
+    public class Ads {
         public String imgsrc;//图片
         public String subtitle;//副标题
         public String tag;//推广 视频
         public String title;//标题
         public String url;//url
-    }
-
-    public static class ImgExtra {
-        public String imgsrc;//图片url
     }
 
     public String getDetailUrl() {

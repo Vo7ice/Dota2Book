@@ -1,11 +1,9 @@
 package com.cn.guojinhu.dota2book.ui.news.newslist;
 
 import android.content.Context;
-import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -13,7 +11,6 @@ import android.widget.TextView;
 
 import com.cn.guojinhu.dota2book.R;
 import com.cn.guojinhu.dota2book.bean.News;
-import com.cn.guojinhu.dota2book.bean.NewsBean;
 import com.cn.guojinhu.dota2book.utils.BitmapUtils;
 
 import java.util.List;
@@ -28,6 +25,8 @@ public class NewsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
 
     private List<News> mNewsList;
     private Context mContext;
+    private AdsAdapter mAdapter;
+    private OnItemClickListener mListener;
 
     private static final int NORMAL = 0;
     private static final int PHOTO_SET = 1;
@@ -39,6 +38,12 @@ public class NewsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public NewsListAdapter(List<News> newsList, Context context) {
         this.mNewsList = newsList;
         this.mContext = context;
+    }
+
+    public NewsListAdapter(List<News> newsList, Context context, OnItemClickListener listener) {
+        this.mNewsList = newsList;
+        this.mContext = context;
+        this.mListener = listener;
     }
 
     @Override
@@ -73,16 +78,33 @@ public class NewsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             BitmapUtils.display(mContext, holder.image_news_list, news.imgsrc);
             holder.text_news_list_title.setText(news.title);
             holder.text_news_list_digest.setText(news.digest);
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (null != mListener){
+                        mListener.onNewsDetail(news.docid);
+                    }
+                }
+            });
         } else if (viewHolder instanceof PhotoSetHolder) {
             final PhotoSetHolder holder = (PhotoSetHolder) viewHolder;
             holder.text_news_list_title.setText(news.title);
             BitmapUtils.display(mContext, holder.imageExtra0, news.imgsrc);
             BitmapUtils.display(mContext, holder.imageExtra1, news.mImgExtraList.get(0).imgsrc);
             BitmapUtils.display(mContext, holder.imageExtra2, news.mImgExtraList.get(1).imgsrc);
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (null != mListener){
+                        mListener.onPhotoSet(news.photosetId);
+                    }
+                }
+            });
         } else if (viewHolder instanceof AdsHolder) {
             final AdsHolder holder = (AdsHolder) viewHolder;
-            holder.viewPagerAds.setAdapter(new AdsAdapter(news, mContext));
-            holder.viewPagerAds.setOnTouchListener(new View.OnTouchListener() {
+            mAdapter = new AdsAdapter(news, mContext,mListener);
+            holder.viewPagerAds.setAdapter(mAdapter);
+            /*holder.viewPagerAds.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View view, MotionEvent motionEvent) {
                     switch (motionEvent.getAction()) {
@@ -108,7 +130,7 @@ public class NewsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                     }
                     return false;
                 }
-            });
+            });*/
         }
     }
 
@@ -149,46 +171,8 @@ public class NewsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         notifyDataSetChanged();
     }
 
-    private class AdsAdapter extends PagerAdapter {
-
-        private News news;
-        private Context context;
-
-        public AdsAdapter(News news, Context context) {
-            this.news = news;
-            this.context = context;
-        }
-
-        @Override
-        public int getCount() {
-            return news.mAdList.size() + 1;
-        }
-
-        @Override
-        public boolean isViewFromObject(View view, Object object) {
-            return view == object;
-        }
-
-        @Override
-        public Object instantiateItem(ViewGroup container, int position) {
-            View view = LayoutInflater.from(context).inflate(R.layout.item_ads, container, false);
-            ImageView image_pic = (ImageView) view.findViewById(R.id.image_pic);
-            TextView text_ads_title = (TextView) view.findViewById(R.id.text_ads_title);
-            if (position == 0) {
-                BitmapUtils.display(context, image_pic, news.imgsrc);
-                text_ads_title.setText(news.title);
-            } else {
-                BitmapUtils.display(context, image_pic, news.mAdList.get(position - 1).imgsrc);
-                text_ads_title.setText(news.mAdList.get(position - 1).title);
-            }
-            container.addView(view);
-            return view;
-        }
-
-        @Override
-        public void destroyItem(ViewGroup container, int position, Object object) {
-            container.removeView((View) object);
-        }
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.mListener = listener;
     }
 
     private static class NewsListHolder extends RecyclerView.ViewHolder {
@@ -225,6 +209,8 @@ public class NewsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             viewPagerAds = (ViewPager) itemView.findViewById(R.id.viewpager_ads);
         }
     }
+
+
 
 
 }

@@ -27,6 +27,10 @@ public class NewsContact {
         void loadChannel();
 
         void loadNewsList(Channel mChannel, int pageIndex);
+
+        void openNews(String docid);
+
+        void openPhotoSet(String photosetId);
     }
 
     public interface ViewList extends BaseView<Presenter> {
@@ -39,5 +43,8 @@ public class NewsContact {
 
         void showErrorMessage();
 
+        void openPhotoSet(String photosetId);
+
+        void openNews(String news);
     }
 }

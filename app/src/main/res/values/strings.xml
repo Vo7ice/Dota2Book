@@ -8,4 +8,8 @@
     <string name="tag_news">新闻</string>
     <string name="network_error">网络不可用</string>
     <string name="news_list_img">NewsListImg</string>
+    <string name="title_activity_news_detail">NewsDetailActivity</string>
+    <string name="title_activity_photo_set">PhotoSetActivity</string>
+    <string name="section_format">Hello World from section: %1$d</string>
+
 </resources>

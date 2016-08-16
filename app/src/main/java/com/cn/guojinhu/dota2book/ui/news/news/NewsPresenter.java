@@ -93,6 +93,16 @@ public class NewsPresenter implements NewsContact.Presenter {
         }
     }
 
+    @Override
+    public void openNews(String docid) {
+        mNewsListView.openNews(docid);
+    }
+
+    @Override
+    public void openPhotoSet(String photosetId) {
+        mNewsListView.openPhotoSet(photosetId);
+    }
+
     /**
      * 网络请求
      *
