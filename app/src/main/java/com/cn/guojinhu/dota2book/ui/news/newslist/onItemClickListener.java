@@ -8,9 +8,9 @@ import com.cn.guojinhu.dota2book.bean.News;
 
 public interface OnItemClickListener {
 
-    void onNewsDetail(String docid);
+    void onNewsDetail(News news);
 
-    void onPhotoSet(String photosetId);
+    void onPhotoSet(News news);
 
-
+    void onAdsPhotoSet(String photosetId);
 }

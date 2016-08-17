@@ -28,7 +28,7 @@ public class NewsContact {
 
         void loadNewsList(Channel mChannel, int pageIndex);
 
-        void openNews(String docid);
+        void openNews(News news);
 
         void openPhotoSet(String photosetId);
     }
@@ -45,6 +45,6 @@ public class NewsContact {
 
         void openPhotoSet(String photosetId);
 
-        void openNews(String news);
+        void openNews(News news);
     }
 }

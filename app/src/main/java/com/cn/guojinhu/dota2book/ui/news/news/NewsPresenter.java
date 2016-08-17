@@ -94,8 +94,8 @@ public class NewsPresenter implements NewsContact.Presenter {
     }
 
     @Override
-    public void openNews(String docid) {
-        mNewsListView.openNews(docid);
+    public void openNews(News news) {
+        mNewsListView.openNews(news);
     }
 
     @Override
