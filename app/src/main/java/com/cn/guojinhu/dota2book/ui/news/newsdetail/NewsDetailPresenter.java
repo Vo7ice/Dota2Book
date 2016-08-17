@@ -1,23 +1,23 @@
 package com.cn.guojinhu.dota2book.ui.news.newsdetail;
 
+import android.content.Context;
 import android.util.Log;
+import android.widget.ImageView;
 
 import com.cn.guojinhu.dota2book.IService.INewsDetail;
 import com.cn.guojinhu.dota2book.bean.NewsDetail;
-import com.cn.guojinhu.dota2book.bean.RespnseSource;
 import com.cn.guojinhu.dota2book.commons.Apis;
-import com.cn.guojinhu.dota2book.utils.Docid;
+import com.cn.guojinhu.dota2book.utils.BitmapUtils;
 import com.cn.guojinhu.dota2book.utils.ServiceGenerator;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-import com.squareup.okhttp.ResponseBody;
 
-import java.io.IOException;
 import java.util.Map;
 
 import retrofit.Callback;
 import retrofit.Response;
 import retrofit.Retrofit;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -28,14 +28,30 @@ import static com.google.common.base.Preconditions.checkNotNull;
 public class NewsDetailPresenter implements NewsDetailContact.Presenter {
     private NewsDetailContact.View baseView;
     private INewsDetail service;
+    private String docid;
+    private String imgsrc;
+
 
     public NewsDetailPresenter(NewsDetailContact.View baseView) {
         this.baseView = checkNotNull(baseView);
     }
 
+    public NewsDetailPresenter(NewsDetailContact.View baseView, String docid, String imgsrc) {
+        this.baseView = checkNotNull(baseView);
+        this.docid = docid;
+        this.imgsrc = imgsrc;
+    }
+
     @Override
     public void start() {
+        displayHeader();
+        loadNews(docid);
+    }
 
+    private void displayHeader() {
+        Context context = baseView.getContext();
+        ImageView headerView = baseView.getHeaderView();
+        BitmapUtils.display(context, headerView, imgsrc);
     }
 
 
@@ -66,7 +82,7 @@ public class NewsDetailPresenter implements NewsDetailContact.Presenter {
             }
         });*/
         service = ServiceGenerator.createService(INewsDetail.class, Apis.HOST_TYPE0 + Apis.NEWS_DETAIL);
-        service.getNewsDetail(docid).enqueue(new Callback<Map<String, NewsDetail>>() {
+        /*service.getNewsDetail(docid).enqueue(new Callback<Map<String, NewsDetail>>() {
             @Override
             public void onResponse(Response<Map<String, NewsDetail>> response, Retrofit retrofit) {
                 NewsDetail detail = response.body().get(docid);
@@ -77,6 +93,24 @@ public class NewsDetailPresenter implements NewsDetailContact.Presenter {
             public void onFailure(Throwable t) {
 
             }
-        });
+        });*/
+        service.getNewsDetail(docid).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<Map<String, NewsDetail>>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(Map<String, NewsDetail> newsDetailMap) {
+                        NewsDetail newsDetail = newsDetailMap.get(docid);
+                    }
+                });
     }
 }

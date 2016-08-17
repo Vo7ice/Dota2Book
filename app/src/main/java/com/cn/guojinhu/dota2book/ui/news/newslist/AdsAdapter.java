@@ -63,12 +63,12 @@ public class AdsAdapter extends PagerAdapter {
                 Log.d("Vo7ice", "ViewPager:onClick-->" + position);
                 if (null != mListener && position == 0) {
                     if (mNews.mImgExtraList.isEmpty()) {
-                        mListener.onNewsDetail(mNews.docid);
+                        mListener.onNewsDetail(mNews);
                     } else {
-                        mListener.onPhotoSet(mNews.photosetId);
+                        mListener.onPhotoSet(mNews);
                     }
                 } else if (null != mListener) {
-                    mListener.onPhotoSet(mNews.mAdList.get(position - 1).url);
+                    mListener.onAdsPhotoSet(mNews.mAdList.get(position - 1).url);
                 }
             }
         });

@@ -43,6 +43,7 @@ public class NewsListFragment extends BaseFragment implements NewsContact.ViewLi
     private static final String DETAIL = "com.cn.guojinhu.newsdetail";
     private static final String PHOTO_SET = "com.cn.guojinhu.photoset";
     private static final String KEY_DETAIL = "key_detail";
+    private static final String KEY_IMG = "key_img";
     private static final String KEY_PHOTOSET = "key_photoset";
 
     public static NewsListFragment newInstance(Channel channel) {
@@ -69,12 +70,17 @@ public class NewsListFragment extends BaseFragment implements NewsContact.ViewLi
     public void initListener() {
         mListener = new OnItemClickListener() {
             @Override
-            public void onNewsDetail(String docid) {
-                mPresenter.openNews(docid);
+            public void onNewsDetail(News news) {
+                mPresenter.openNews(news);
             }
 
             @Override
-            public void onPhotoSet(String photosetId) {
+            public void onPhotoSet(News news) {
+                mPresenter.openPhotoSet(news.photosetId);
+            }
+
+            @Override
+            public void onAdsPhotoSet(String photosetId) {
                 mPresenter.openPhotoSet(photosetId);
             }
         };
@@ -159,9 +165,10 @@ public class NewsListFragment extends BaseFragment implements NewsContact.ViewLi
     }
 
     @Override
-    public void openNews(String docid) {
+    public void openNews(News news) {
         Intent intent = new Intent(DETAIL);
-        intent.putExtra(KEY_DETAIL,docid);
+        intent.putExtra(KEY_DETAIL,news.docid);
+        intent.putExtra(KEY_IMG,news.imgsrc);
         getActivity().startActivity(intent);
     }
 

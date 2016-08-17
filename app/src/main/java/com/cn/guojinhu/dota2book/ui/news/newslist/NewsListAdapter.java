@@ -82,7 +82,7 @@ public class NewsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 @Override
                 public void onClick(View view) {
                     if (null != mListener){
-                        mListener.onNewsDetail(news.docid);
+                        mListener.onNewsDetail(news);
                     }
                 }
             });
@@ -96,7 +96,7 @@ public class NewsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
                 @Override
                 public void onClick(View view) {
                     if (null != mListener){
-                        mListener.onPhotoSet(news.photosetId);
+                        mListener.onPhotoSet(news);
                     }
                 }
             });

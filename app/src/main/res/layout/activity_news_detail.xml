@@ -28,7 +28,7 @@
                 android:layout_height="match_parent"
                 android:contentDescription="@string/title_activity_news_detail"
                 android:fitsSystemWindows="true"
-                android:scaleType="centerCrop"
+                android:scaleType="fitCenter"
                 android:src="@drawable/ic_photo_size_select_actual_black_24dp"
                 app:layout_collapseMode="parallax"
                 app:layout_collapseParallaxMultiplier="0.6" />
