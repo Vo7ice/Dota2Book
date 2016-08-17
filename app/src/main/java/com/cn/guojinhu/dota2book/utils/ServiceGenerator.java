@@ -29,4 +29,17 @@ public class ServiceGenerator {
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create());
     }
+
+    public static <S> S customCreateService(Class<S> serviceClass,String url){
+        Retrofit retrofit = CustomBuilder(url).client(new OkHttpClient()).build();
+        return retrofit.create(serviceClass);
+    }
+
+    private static Retrofit.Builder CustomBuilder(String baseUrl){
+        return new Retrofit.Builder().baseUrl(baseUrl)
+                .addConverterFactory(CustomConverterFactory.create())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create());
+    }
+
+
 }

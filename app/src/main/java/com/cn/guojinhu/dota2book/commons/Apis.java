@@ -15,4 +15,8 @@ public class Apis {
     public static final String NORMAL = "/nc/article/list/";
 
     public static final String HEADLINE = "/nc/article/headline/";
+
+    public static final String PHOTO_SET = "/photo/api/set/";
+
+    public static final String NEWS_DETAIL = "/nc/article/";
 }

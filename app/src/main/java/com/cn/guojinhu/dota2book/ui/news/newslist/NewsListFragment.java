@@ -1,12 +1,12 @@
 package com.cn.guojinhu.dota2book.ui.news.newslist;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.OnScrollListener;
 import android.util.Log;
 import android.view.View;
 
@@ -38,6 +38,12 @@ public class NewsListFragment extends BaseFragment implements NewsContact.ViewLi
     private int pageIndex = 0;
     private Channel mChannel;
     private LinearLayoutManager mLayoutManager;
+    private OnItemClickListener mListener;
+
+    private static final String DETAIL = "com.cn.guojinhu.newsdetail";
+    private static final String PHOTO_SET = "com.cn.guojinhu.photoset";
+    private static final String KEY_DETAIL = "key_detail";
+    private static final String KEY_PHOTOSET = "key_photoset";
 
     public static NewsListFragment newInstance(Channel channel) {
         NewsListFragment fragment = new NewsListFragment();
@@ -61,7 +67,17 @@ public class NewsListFragment extends BaseFragment implements NewsContact.ViewLi
 
     @Override
     public void initListener() {
+        mListener = new OnItemClickListener() {
+            @Override
+            public void onNewsDetail(String docid) {
+                mPresenter.openNews(docid);
+            }
 
+            @Override
+            public void onPhotoSet(String photosetId) {
+                mPresenter.openPhotoSet(photosetId);
+            }
+        };
     }
 
     @Override
@@ -71,6 +87,8 @@ public class NewsListFragment extends BaseFragment implements NewsContact.ViewLi
         mSwipeRefreshLayout.setOnRefreshListener(this);//下拉刷新
 
         mAdapter = new NewsListAdapter(new ArrayList<News>(), getActivity());
+        mAdapter.setOnItemClickListener(mListener);
+
         mLayoutManager = new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
@@ -97,7 +115,6 @@ public class NewsListFragment extends BaseFragment implements NewsContact.ViewLi
                 }
             }
         });
-
 
         mPresenter = new NewsPresenter(this);
         mPresenter.loadNewsList(mChannel, pageIndex);
@@ -132,6 +149,20 @@ public class NewsListFragment extends BaseFragment implements NewsContact.ViewLi
     @Override
     public void showErrorMessage() {
         Snackbar.make(getRootView(), R.string.network_error, Snackbar.LENGTH_LONG).show();
+    }
+
+    @Override
+    public void openPhotoSet(String photosetId) {
+        Intent intent = new Intent(PHOTO_SET);
+        intent.putExtra(KEY_PHOTOSET,photosetId);
+        getActivity().startActivity(intent);
+    }
+
+    @Override
+    public void openNews(String docid) {
+        Intent intent = new Intent(DETAIL);
+        intent.putExtra(KEY_DETAIL,docid);
+        getActivity().startActivity(intent);
     }
 
     @Override
