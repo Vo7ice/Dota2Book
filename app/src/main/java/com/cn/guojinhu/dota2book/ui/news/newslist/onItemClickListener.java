@@ -6,7 +6,7 @@ import com.cn.guojinhu.dota2book.bean.News;
  * Created by guojin.hu on 2016/8/16.
  */
 
-public interface OnItemClickListener {
+interface OnItemClickListener {
 
     void onNewsDetail(News news);
 

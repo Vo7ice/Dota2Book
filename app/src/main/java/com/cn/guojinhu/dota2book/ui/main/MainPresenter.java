@@ -35,6 +35,9 @@ public class MainPresenter implements MainContract.Presenter {
             case R.id.nav_news:
                 mMainView.switch2News();
                 break;
+            case R.id.nav_heroes:
+                mMainView.switch2Heroes();
+                break;
         }
         item.setChecked(true);
         mMainView.closeDrawerIfNeeded();

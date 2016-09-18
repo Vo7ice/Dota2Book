@@ -19,7 +19,7 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="5dp"
         android:padding="10dp"
-        android:text="小汤唯”摘胸模大赛桂冠"
+        android:text="小汤唯 摘胸模大赛桂冠"
         android:textColor="#ffffff"
         android:textSize="15sp" />
 </RelativeLayout>

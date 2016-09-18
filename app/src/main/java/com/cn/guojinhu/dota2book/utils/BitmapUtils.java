@@ -34,4 +34,10 @@ public class BitmapUtils {
                 .into(imageView);
     }
 
+    public static void displayRoundImage(Context context,ImageView imageView,String url){
+        Glide.with(context).load(url)
+                .transform(new GlideRoundTransform(context))
+                .into(imageView);
+    }
+
 }

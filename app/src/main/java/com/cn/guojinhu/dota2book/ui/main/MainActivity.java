@@ -12,6 +12,7 @@ import android.view.MenuItem;
 
 import com.cn.guojinhu.dota2book.base.BaseActivity;
 import com.cn.guojinhu.dota2book.R;
+import com.cn.guojinhu.dota2book.ui.heroes.HeroesFragment;
 import com.cn.guojinhu.dota2book.ui.news.news.NewsFragment;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -149,5 +150,13 @@ public class MainActivity extends BaseActivity
         if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
             mDrawerLayout.closeDrawer(GravityCompat.START);
         }
+    }
+
+    @Override
+    public void switch2Heroes() {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.content_main, new HeroesFragment(), getResources().getString(R.string.tag_news));
+        ft.commit();
+        mToolbar.setTitle(R.string.tag_heroes);
     }
 }
