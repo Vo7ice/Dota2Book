@@ -21,7 +21,6 @@ import static com.google.common.base.Preconditions.checkNotNull;
 
 public class NewsFragment extends BaseFragment implements NewsContact.View {
 
-    private View mRootView;
     private TabLayout mTabLayout;
     private ViewPager mViewPager;
     private NewsPageAdapter mAdapter;
@@ -34,7 +33,7 @@ public class NewsFragment extends BaseFragment implements NewsContact.View {
 
     @Override
     public void initViews() {
-        mRootView = getRootView();
+        View mRootView = getRootView();
         mTabLayout = (TabLayout) mRootView.findViewById(R.id.news_tab_layout);
         mViewPager = (ViewPager) mRootView.findViewById(R.id.news_viewpager);
     }
