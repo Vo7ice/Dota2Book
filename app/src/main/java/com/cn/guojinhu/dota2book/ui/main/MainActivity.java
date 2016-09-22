@@ -12,6 +12,7 @@ import android.view.MenuItem;
 
 import com.cn.guojinhu.dota2book.base.BaseActivity;
 import com.cn.guojinhu.dota2book.R;
+import com.cn.guojinhu.dota2book.ui.equipments.EquipmentsFragment;
 import com.cn.guojinhu.dota2book.ui.heroes.HeroesFragment;
 import com.cn.guojinhu.dota2book.ui.news.news.NewsFragment;
 
@@ -156,8 +157,16 @@ public class MainActivity extends BaseActivity
     @Override
     public void switch2Heroes() {
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.content_main, new HeroesFragment(), getResources().getString(R.string.tag_news));
+        ft.replace(R.id.content_main, new HeroesFragment(), getResources().getString(R.string.tag_heroes));
         ft.commit();
         mToolbar.setTitle(R.string.tag_heroes);
+    }
+
+    @Override
+    public void switch2Equipments() {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.content_main, new EquipmentsFragment(), getResources().getString(R.string.tag_goods));
+        ft.commit();
+        mToolbar.setTitle(R.string.tag_goods);
     }
 }

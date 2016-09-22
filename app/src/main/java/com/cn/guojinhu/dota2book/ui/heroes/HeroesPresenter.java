@@ -7,10 +7,8 @@ import com.cn.guojinhu.dota2book.bean.Heroes;
 import com.cn.guojinhu.dota2book.utils.JsonUtils;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
-import static com.cn.guojinhu.dota2book.utils.JsonUtils.getHeroesFromAssets;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
@@ -33,7 +31,7 @@ public class HeroesPresenter implements HeroesContact.Presenter {
 
     public List<Heroes.Hero> getHeroList(Context context) {
         try {
-            return getHeroesFromAssets(context);
+            return JsonUtils.getHeroesFromAssets(context);
         } catch (IOException e) {
             e.printStackTrace();
             Log.d("Vo7ice","error:"+e.getMessage());
