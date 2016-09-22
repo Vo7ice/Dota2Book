@@ -5,5 +5,5 @@ package com.cn.guojinhu.dota2book.commons;
  */
 
 public class Dota2Apis {
-    public static final String BASE_URL = "http://www.dota2.com";
+    public static final String BASE_URL = "http://www.dota2.com.cn";
 }

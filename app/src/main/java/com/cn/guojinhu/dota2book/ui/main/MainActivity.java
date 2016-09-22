@@ -137,19 +137,20 @@ public class MainActivity extends BaseActivity
         return mDrawerLayout.isDrawerOpen(GravityCompat.START);
     }
 
-    @Override
-    public void switch2News() {
-        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-        ft.replace(R.id.content_main, new NewsFragment(), getResources().getString(R.string.tag_news));
-        ft.commit();
-        mToolbar.setTitle(R.string.tag_news);
-    }
 
     @Override
     public void closeDrawerIfNeeded() {
         if (mDrawerLayout.isDrawerOpen(GravityCompat.START)) {
             mDrawerLayout.closeDrawer(GravityCompat.START);
         }
+    }
+
+    @Override
+    public void switch2News() {
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.replace(R.id.content_main, new NewsFragment(), getResources().getString(R.string.tag_news));
+        ft.commit();
+        mToolbar.setTitle(R.string.tag_news);
     }
 
     @Override

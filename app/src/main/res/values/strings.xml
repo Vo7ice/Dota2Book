@@ -13,5 +13,6 @@
     <string name="section_format">Hello World from section: %1$d</string>
 
     <string name="tag_heroes">英雄</string>
+    <string name="Heroes">英雄</string>
 
 </resources>

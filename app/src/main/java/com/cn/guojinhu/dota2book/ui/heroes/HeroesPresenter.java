@@ -1,9 +1,16 @@
 package com.cn.guojinhu.dota2book.ui.heroes;
 
-import com.cn.guojinhu.dota2book.bean.Heroes;
+import android.content.Context;
+import android.util.Log;
 
+import com.cn.guojinhu.dota2book.bean.Heroes;
+import com.cn.guojinhu.dota2book.utils.JsonUtils;
+
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
+import static com.cn.guojinhu.dota2book.utils.JsonUtils.getHeroesFromAssets;
 import static com.google.common.base.Preconditions.checkNotNull;
 
 /**
@@ -14,6 +21,7 @@ public class HeroesPresenter implements HeroesContact.Presenter {
 
     private HeroesContact.View baseView;
 
+
     public HeroesPresenter(HeroesContact.View baseView) {
         this.baseView = checkNotNull(baseView);
     }
@@ -23,7 +31,14 @@ public class HeroesPresenter implements HeroesContact.Presenter {
 
     }
 
-    public List<Heroes.Hero> getHeroList() {
+    public List<Heroes.Hero> getHeroList(Context context) {
+        try {
+            return getHeroesFromAssets(context);
+        } catch (IOException e) {
+            e.printStackTrace();
+            Log.d("Vo7ice","error:"+e.getMessage());
+        }
         return null;
     }
+
 }

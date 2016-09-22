@@ -29,6 +29,7 @@ public class BitmapUtils {
         request.error(errorImg);
         request.thumbnail(0.1f)//用原图的1/10作为缩略图,优先加载缩略图
                 .fitCenter()
+                //.transform(new GlideRoundTransform(context))
                 //.dontAnimate()//不显示动画
                 .crossFade()//渐入渐出
                 .into(imageView);
@@ -36,7 +37,7 @@ public class BitmapUtils {
 
     public static void displayRoundImage(Context context,ImageView imageView,String url){
         Glide.with(context).load(url)
-                .transform(new GlideRoundTransform(context))
+                //.transform(new GlideRoundTransform(context))
                 .into(imageView);
     }
 

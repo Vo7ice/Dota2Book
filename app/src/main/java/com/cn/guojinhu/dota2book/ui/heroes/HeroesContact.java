@@ -14,9 +14,11 @@ import java.util.List;
 
 public class HeroesContact {
     public interface View extends BaseView<Presenter> {
+
     }
 
     public interface Presenter extends BasePresenter {
-        List<Heroes.Hero> getHeroList();
+        List<Heroes.Hero> getHeroList(Context context);
+
     }
 }

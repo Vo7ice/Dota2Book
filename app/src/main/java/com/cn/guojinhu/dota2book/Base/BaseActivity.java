@@ -30,8 +30,8 @@ public abstract class BaseActivity extends SwipeBackActivity implements IInitial
     protected void onResume() {
         super.onResume();
         initViews();
-        initListener();
         initData();
+        initListener();
     }
 
 }

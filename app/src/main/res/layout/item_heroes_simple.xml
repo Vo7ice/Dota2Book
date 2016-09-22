@@ -21,8 +21,8 @@
 
         <ImageView
             android:id="@+id/image_avatar"
-            android:layout_width="78dp"
-            android:layout_height="78dp"
+            android:layout_width="58dp"
+            android:layout_height="58dp"
             android:scaleType="centerCrop"
             android:src="@drawable/ic_photo_size_select_actual_black_24dp" />
 
@@ -31,6 +31,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
+            android:maxLines="1"
             android:text="antimage"
             android:textAllCaps="true"
             android:textSize="12sp"
@@ -40,9 +41,9 @@
             android:id="@+id/text_cname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="3dp"
+            android:maxLines="1"
             android:text="敌法师"
-            android:textAllCaps="true"
             android:textSize="12sp"
             android:textStyle="bold" />
     </LinearLayout>
