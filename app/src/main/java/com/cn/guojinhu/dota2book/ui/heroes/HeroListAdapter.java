@@ -22,7 +22,7 @@ import java.util.List;
  */
 
 public class HeroListAdapter extends BaseAdapter<Heroes.Hero> {
-    private static final String TAG="HeroListAdapter";
+    private static final String TAG = "HeroListAdapter";
 
     public HeroListAdapter(List<Heroes.Hero> t, Context mContext) {
         super(t, mContext);
@@ -44,12 +44,12 @@ public class HeroListAdapter extends BaseAdapter<Heroes.Hero> {
         final Heroes.Hero hero = t.get(position);
         if (holder instanceof HeroHolder) {
             final HeroHolder heroHolder = (HeroHolder) holder;
-            heroHolder.text_name.setText(hero.name.replace("_","").trim());
+            heroHolder.text_name.setText(hero.name.replace("_", "").trim());
             heroHolder.text_cname.setText(hero.cname);
-            /*BitmapUtils.displayRoundImage(mContext,
-                    ((HeroHolder) holder).image_avatar, Dota2Apis.BASE_URL + hero.HoverSmall);*/
-			BitmapUtils.display(mContext, heroHolder.image_avatar, Dota2Apis.BASE_URL + hero.HoverLarge);
-            Log.i(TAG,"中文名： "+hero.cname+"english name :"+hero.name);
+            BitmapUtils.displayCircleImage(mContext,
+                    heroHolder.image_avatar, Dota2Apis.BASE_URL + hero.HoverSmall);
+            //BitmapUtils.display(mContext, heroHolder.image_avatar, Dota2Apis.BASE_URL + hero.HoverLarge);
+            Log.i(TAG, "url： " + hero.HoverSmall);
         }
     }
 
