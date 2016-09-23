@@ -1,5 +1,6 @@
 package com.cn.guojinhu.dota2book.ui.main;
 
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentTransaction;
@@ -7,6 +8,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -26,6 +28,9 @@ public class MainActivity extends BaseActivity
     private NavigationView mNavigationView;
 
     private MainPresenter mMainPresenter;
+
+    private static final int NEWS = 0;
+    private static final int HEROES = 1;
 
 
     @Override
@@ -117,6 +122,12 @@ public class MainActivity extends BaseActivity
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        Log.d("Vo7ice", "onConfigurationChanged");
     }
 
     @SuppressWarnings("StatementWithEmptyBody")

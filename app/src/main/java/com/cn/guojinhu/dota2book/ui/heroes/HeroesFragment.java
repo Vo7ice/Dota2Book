@@ -56,7 +56,6 @@ public class HeroesFragment extends BaseFragment implements HeroesContact.View {
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
-
         mPresenter = new HeroesPresenter(this);
         mPresenter.start();
         mHeroList = mPresenter.getHeroList(getActivity());

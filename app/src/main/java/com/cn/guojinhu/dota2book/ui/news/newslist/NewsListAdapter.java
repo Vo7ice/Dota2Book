@@ -81,7 +81,7 @@ public class NewsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (null != mListener){
+                    if (null != mListener) {
                         mListener.onNewsDetail(news);
                     }
                 }
@@ -95,14 +95,14 @@ public class NewsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    if (null != mListener){
+                    if (null != mListener) {
                         mListener.onPhotoSet(news);
                     }
                 }
             });
         } else if (viewHolder instanceof AdsHolder) {
             final AdsHolder holder = (AdsHolder) viewHolder;
-            mAdapter = new AdsAdapter(news, mContext,mListener);
+            mAdapter = new AdsAdapter(news, mContext, mListener);
             holder.viewPagerAds.setAdapter(mAdapter);
             /*holder.viewPagerAds.setOnTouchListener(new View.OnTouchListener() {
                 @Override
@@ -137,7 +137,7 @@ public class NewsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public int getItemViewType(int position) {
         final News news = mNewsList.get(position);
-        if (!news.mAdList.isEmpty()) {
+        if (!news.mAdList.isEmpty() && position == 0) {
             return ADS;
         } else if (!news.mImgExtraList.isEmpty() && news.mAdList.isEmpty()) {
             return PHOTO_SET;
