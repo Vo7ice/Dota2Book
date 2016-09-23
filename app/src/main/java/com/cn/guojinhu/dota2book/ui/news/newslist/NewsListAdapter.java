@@ -137,7 +137,7 @@ public class NewsListAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     @Override
     public int getItemViewType(int position) {
         final News news = mNewsList.get(position);
-        if (!news.mAdList.isEmpty()) {
+        if (!news.mAdList.isEmpty() && position == 0) {
             return ADS;
         } else if (!news.mImgExtraList.isEmpty() && news.mAdList.isEmpty()) {
             return PHOTO_SET;

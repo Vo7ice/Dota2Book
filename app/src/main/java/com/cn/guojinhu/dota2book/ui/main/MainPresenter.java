@@ -16,6 +16,8 @@ public class MainPresenter implements MainContract.Presenter {
 
     private MainContract.View mMainView;
 
+    private int mCurrentTagId = -1;
+
     public MainPresenter(MainContract.View mainView) {
         mMainView = mainView;
 
@@ -26,7 +28,15 @@ public class MainPresenter implements MainContract.Presenter {
 
     @Override
     public void start() {
-        mMainView.switch2News();
+        switch (mCurrentTagId) {
+            default:
+            case R.id.nav_news:
+                mMainView.switch2News();
+                break;
+            case R.id.nav_heroes:
+                mMainView.switch2Heroes();
+                break;
+        }
     }
 
     @Override
@@ -39,6 +49,7 @@ public class MainPresenter implements MainContract.Presenter {
                 mMainView.switch2Heroes();
                 break;
         }
+        mCurrentTagId = item.getItemId();
         item.setChecked(true);
         mMainView.closeDrawerIfNeeded();
     }
