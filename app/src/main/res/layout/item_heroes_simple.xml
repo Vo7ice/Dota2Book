@@ -21,15 +21,9 @@
 
         <ImageView
             android:id="@+id/image_avatar"
-<<<<<<< HEAD
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:scaleType="centerCrop"
-=======
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:scaleType="fitCenter"
->>>>>>> 65fde6fc5dea308fab6669c89cb2d50ccc730f3a
             android:src="@drawable/ic_photo_size_select_actual_black_24dp" />
 
         <TextView

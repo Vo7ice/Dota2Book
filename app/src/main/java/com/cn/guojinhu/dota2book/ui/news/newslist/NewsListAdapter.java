@@ -155,11 +155,6 @@ public class NewsListAdapter extends BaseAdapter<News> {
 
     @Override
     public int getItemViewType(int position) {
-<<<<<<< HEAD
-        final News news = mNewsList.get(position);
-        if (!news.mAdList.isEmpty() && position == 0) {
-            return ADS;
-=======
         final News news = t.get(position);
         if (position == 0) {
             if (!news.mAdList.isEmpty()) {
@@ -167,7 +162,6 @@ public class NewsListAdapter extends BaseAdapter<News> {
             } else {
                 return FIRST;
             }
->>>>>>> 65fde6fc5dea308fab6669c89cb2d50ccc730f3a
         } else if (!news.mImgExtraList.isEmpty() && news.mAdList.isEmpty()) {
             return PHOTO_SET;
         } else {
