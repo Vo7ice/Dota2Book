@@ -1,9 +1,5 @@
 package com.cn.guojinhu.dota2book.utils;
 
-/**
- * Created by guojin.hu on 2016/9/23.
- */
-
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapShader;
@@ -14,6 +10,7 @@ import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.bumptech.glide.load.resource.bitmap.BitmapTransformation;
 
 /**
+ * Created by guojin.hu on 2016/9/23.
  * 图片转圆形
  * http://blog.csdn.net/weidongjian/article/details/47144549
  */

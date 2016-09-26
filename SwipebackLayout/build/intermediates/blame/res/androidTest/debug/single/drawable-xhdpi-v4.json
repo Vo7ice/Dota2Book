@@ -1,21 +1,5 @@
 [
     {
-        "merged": "D:\\Git\\Dota2Book\\SwipebackLayout\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\shadow_right.png",
-        "source": "D:\\Git\\Dota2Book\\SwipebackLayout\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\shadow_right.png"
-    },
-    {
-        "merged": "D:\\AndroidStudioProjects\\Dota2Book\\SwipebackLayout\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\shadow_bottom.png",
-        "source": "D:\\AndroidStudioProjects\\Dota2Book\\SwipebackLayout\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\shadow_bottom.png"
-    },
-    {
-        "merged": "D:\\Git\\Dota2Book\\SwipebackLayout\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\shadow_bottom.png",
-        "source": "D:\\Git\\Dota2Book\\SwipebackLayout\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\shadow_bottom.png"
-    },
-    {
-        "merged": "D:\\AndroidStudioProjects\\Dota2Book\\SwipebackLayout\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\shadow_right.png",
-        "source": "D:\\AndroidStudioProjects\\Dota2Book\\SwipebackLayout\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\shadow_right.png"
-    },
-    {
         "merged": "D:\\Git\\TouHenYing\\Dota2Book\\SwipebackLayout\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\shadow_right.png",
         "source": "D:\\Git\\TouHenYing\\Dota2Book\\SwipebackLayout\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\shadow_right.png"
     },
@@ -24,15 +8,7 @@
         "source": "D:\\Git\\TouHenYing\\Dota2Book\\SwipebackLayout\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\shadow_left.png"
     },
     {
-        "merged": "D:\\Git\\Dota2Book\\SwipebackLayout\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\shadow_left.png",
-        "source": "D:\\Git\\Dota2Book\\SwipebackLayout\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\shadow_left.png"
-    },
-    {
         "merged": "D:\\Git\\TouHenYing\\Dota2Book\\SwipebackLayout\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\shadow_bottom.png",
         "source": "D:\\Git\\TouHenYing\\Dota2Book\\SwipebackLayout\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\shadow_bottom.png"
-    },
-    {
-        "merged": "D:\\AndroidStudioProjects\\Dota2Book\\SwipebackLayout\\build\\intermediates\\res\\merged\\androidTest\\debug\\drawable-xhdpi-v4\\shadow_left.png",
-        "source": "D:\\AndroidStudioProjects\\Dota2Book\\SwipebackLayout\\build\\intermediates\\bundles\\debug\\res\\drawable-xhdpi-v4\\shadow_left.png"
     }
 ]

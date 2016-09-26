@@ -47,7 +47,7 @@ public class HeroListAdapter extends BaseAdapter<Heroes.Hero> {
             heroHolder.text_name.setText(hero.name.replace("_", "").trim());
             heroHolder.text_cname.setText(hero.cname);
             BitmapUtils.displayCircleImage(mContext,
-                    heroHolder.image_avatar, Dota2Apis.BASE_URL + hero.HoverSmall);
+                    heroHolder.image_avatar, Dota2Apis.BASE_URL + hero.HoverLarge);
             //BitmapUtils.display(mContext, heroHolder.image_avatar, Dota2Apis.BASE_URL + hero.HoverLarge);
             Log.i(TAG, "url： " + hero.HoverSmall);
         }
