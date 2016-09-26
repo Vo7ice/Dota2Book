@@ -19,6 +19,8 @@ public class MainContract {
         void closeDrawerIfNeeded();
 
         void switch2Heroes();
+
+        void switch2Equipments();
     }
 
     public interface Presenter extends BasePresenter {

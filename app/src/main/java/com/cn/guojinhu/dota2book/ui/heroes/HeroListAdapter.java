@@ -2,6 +2,7 @@ package com.cn.guojinhu.dota2book.ui.heroes;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +22,7 @@ import java.util.List;
  */
 
 public class HeroListAdapter extends BaseAdapter<Heroes.Hero> {
+    private static final String TAG = "HeroListAdapter";
 
     public HeroListAdapter(List<Heroes.Hero> t, Context mContext) {
         super(t, mContext);
@@ -42,11 +44,18 @@ public class HeroListAdapter extends BaseAdapter<Heroes.Hero> {
         final Heroes.Hero hero = t.get(position);
         if (holder instanceof HeroHolder) {
             final HeroHolder heroHolder = (HeroHolder) holder;
-            heroHolder.text_name.setText(hero.name);
+            heroHolder.text_name.setText(hero.name.replace("_", "").trim());
             heroHolder.text_cname.setText(hero.cname);
+<<<<<<< HEAD
             /*BitmapUtils.displayRoundImage(mContext,
                     ((HeroHolder) holder).image_avatar, Dota2Apis.BASE_URL + hero.HoverSmall);*/
             BitmapUtils.display(mContext, heroHolder.image_avatar, Dota2Apis.BASE_URL + hero.HoverLarge);
+=======
+            BitmapUtils.displayCircleImage(mContext,
+                    heroHolder.image_avatar, Dota2Apis.BASE_URL + hero.HoverLarge);
+            //BitmapUtils.display(mContext, heroHolder.image_avatar, Dota2Apis.BASE_URL + hero.HoverLarge);
+            Log.i(TAG, "url： " + hero.HoverSmall);
+>>>>>>> 65fde6fc5dea308fab6669c89cb2d50ccc730f3a
         }
     }
 

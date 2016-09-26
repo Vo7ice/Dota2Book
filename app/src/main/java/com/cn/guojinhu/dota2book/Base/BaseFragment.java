@@ -34,7 +34,7 @@ public abstract class BaseFragment extends Fragment implements IInitialize {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         this.initViews();
-        this.initData();
         this.initListener();
+        this.initData();
     }
 }

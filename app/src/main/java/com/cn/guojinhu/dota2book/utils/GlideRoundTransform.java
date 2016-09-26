@@ -21,15 +21,12 @@ public class GlideRoundTransform extends BitmapTransformation {
     private static float radius = 0f;
 
     public GlideRoundTransform(Context context) {
-        super(context);
+        this(context, 4);
     }
 
     public GlideRoundTransform(Context context, int dp) {
         super(context);
-        WindowManager wm = (WindowManager) context.getSystemService(Context.WINDOW_SERVICE);
-        DisplayMetrics dm = new DisplayMetrics();
-        wm.getDefaultDisplay().getMetrics(dm);
-        radius = dm.density * dp;
+        radius = Resources.getSystem().getDisplayMetrics().density * dp;
     }
 
     private static Bitmap roundCrop(BitmapPool pool, Bitmap source) {
@@ -51,7 +48,7 @@ public class GlideRoundTransform extends BitmapTransformation {
 
     @Override
     protected Bitmap transform(BitmapPool pool, Bitmap toTransform, int outWidth, int outHeight) {
-        return roundCrop(pool,toTransform);
+        return roundCrop(pool, toTransform);
     }
 
     @Override
