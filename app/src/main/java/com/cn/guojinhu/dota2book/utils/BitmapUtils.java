@@ -22,7 +22,7 @@ public class BitmapUtils {
                 R.drawable.ic_photo_size_select_actual_black_24dp);
     }
 
-    private static void display(Context context,ImageView imageView, String url,
+    private static void display(Context context, ImageView imageView, String url,
                                 @DrawableRes int loadingImg, @DrawableRes int errorImg) {
         DrawableTypeRequest<String> request = Glide.with(context).load(url);
         request.placeholder(loadingImg);
@@ -35,10 +35,13 @@ public class BitmapUtils {
                 .into(imageView);
     }
 
-    public static void displayRoundImage(Context context,ImageView imageView,String url){
+    public static void displayRoundImage(Context context, ImageView imageView, String url) {
         Glide.with(context).load(url)
                 //.transform(new GlideRoundTransform(context))
+                .placeholder(R.drawable.ic_photo_size_select_actual_black_24dp)
+//                .error(R.drawable.ic_error)
+                .crossFade()
+                .override(300,150)
                 .into(imageView);
     }
-
 }

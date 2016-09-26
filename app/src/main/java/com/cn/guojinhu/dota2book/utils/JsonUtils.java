@@ -25,10 +25,8 @@ public class JsonUtils {
     public static List<Heroes.Hero> getHeroesFromAssets(Context context) throws IOException {
         InputStream is = context.getAssets().open(KEY_HEROESLIST_FILE_NAME);
         String result = getJsonString(is);
-        OtherUtils.close(is);
         Gson gson = new Gson();
         Heroes heroes = gson.fromJson(result, Heroes.class);
-        OtherUtils.close(is);
         return heroes.Heroes;
     }
 
@@ -37,7 +35,6 @@ public class JsonUtils {
         String result = getJsonString(is);
         Gson gson = new Gson();
         Equipments equipments = gson.fromJson(result, Equipments.class);
-        OtherUtils.close(is);
         return equipments.equipments;
     }
 

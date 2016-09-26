@@ -48,6 +48,8 @@ public class MainPresenter implements MainContract.Presenter {
             case R.id.nav_heroes:
                 mMainView.switch2Heroes();
                 break;
+            case R.id.nav_goods:
+                mMainView.switch2Equipments();
         }
         mCurrentTagId = item.getItemId();
         item.setChecked(true);

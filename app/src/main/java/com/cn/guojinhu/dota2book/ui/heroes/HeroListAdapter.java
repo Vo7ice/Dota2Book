@@ -48,8 +48,9 @@ public class HeroListAdapter extends BaseAdapter<Heroes.Hero> {
             heroHolder.text_cname.setText(hero.cname);
             /*BitmapUtils.displayRoundImage(mContext,
                     ((HeroHolder) holder).image_avatar, Dota2Apis.BASE_URL + hero.HoverSmall);*/
-			BitmapUtils.display(mContext, heroHolder.image_avatar, Dota2Apis.BASE_URL + hero.HoverLarge);
+            BitmapUtils.display(mContext, heroHolder.image_avatar, Dota2Apis.BASE_URL + hero.HoverLarge);
             Log.i(TAG,"中文名： "+hero.cname+"english name :"+hero.name);
+
         }
     }
 
