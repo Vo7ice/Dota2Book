@@ -41,7 +41,8 @@ public class BitmapUtils {
                 .placeholder(R.drawable.ic_photo_size_select_actual_black_24dp)
 //                .error(R.drawable.ic_error)
                 .crossFade()
-                .override(300,150)
+//                .override(300,150)
+                .centerCrop()
                 .into(imageView);
     }
 }
