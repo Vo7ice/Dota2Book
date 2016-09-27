@@ -1,6 +1,5 @@
 package com.cn.guojinhu.dota2book.ui.heroes;
 
-import android.os.AsyncTask;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,6 +12,12 @@ import com.cn.guojinhu.dota2book.bean.Heroes;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import rx.Observable;
+import rx.Observer;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 import static com.google.common.base.Preconditions.checkNotNull;
 
@@ -61,25 +66,42 @@ public class HeroesFragment extends BaseFragment implements HeroesContact.View {
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
 
         mPresenter = new HeroesPresenter(this);
-        new GetHeroListTask().execute();
+        getHeroList();
         mPresenter.start();
     }
 
-    private class GetHeroListTask extends AsyncTask<Void,Void,List<Heroes.Hero>>{
+    private void getHeroList(){
+        Observable.create(new Observable.OnSubscribe<List<Heroes.Hero>>() {
+            @Override
+            public void call(Subscriber<? super List<Heroes.Hero>> subscriber) {
 
-        @Override
-        protected List<Heroes.Hero> doInBackground(Void... params) {
-            return mPresenter.getHeroList(getContext().getApplicationContext());
-        }
-
-        @Override
-        protected void onPostExecute(List<Heroes.Hero> heros) {
-            mHeroList=heros;
-            if (null != heros && !heros.isEmpty()) {
-                mAdapter.replaceData(heros);
+                List<Heroes.Hero> list=mPresenter.getHeroList(getActivity());
+                subscriber.onNext(list);
+                subscriber.onCompleted();
             }
-            Log.i(TAG,"get heros success");
-        }
+        })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Observer<List<Heroes.Hero>>() {
+                    @Override
+                    public void onCompleted() {
+
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+
+                    }
+
+                    @Override
+                    public void onNext(List<Heroes.Hero> heros) {
+                        mHeroList=heros;
+                        if (null != heros && !heros.isEmpty()) {
+                            mAdapter.replaceData(heros);
+                        }
+                        Log.i(TAG,"get heros success");
+                    }
+                });
     }
 
 }
