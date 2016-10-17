@@ -4,7 +4,7 @@ import android.content.Context;
 
 import com.cn.guojinhu.dota2book.base.BasePresenter;
 import com.cn.guojinhu.dota2book.base.BaseView;
-import com.cn.guojinhu.dota2book.bean.Heroes;
+import com.cn.guojinhu.dota2book.bean.Hero;
 
 import java.util.List;
 
@@ -18,7 +18,7 @@ public class HeroesContact {
     }
 
     public interface Presenter extends BasePresenter {
-        List<Heroes.Hero> getHeroList(Context context);
+        List<Hero> getHeroList(Context context);
 
     }
 }

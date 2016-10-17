@@ -29,10 +29,10 @@ public class MainPresenter implements MainContract.Presenter {
     @Override
     public void start() {
         switch (mCurrentTagId) {
-            default:
             case R.id.nav_news:
                 mMainView.switch2News();
                 break;
+            default:
             case R.id.nav_heroes:
                 mMainView.switch2Heroes();
                 break;

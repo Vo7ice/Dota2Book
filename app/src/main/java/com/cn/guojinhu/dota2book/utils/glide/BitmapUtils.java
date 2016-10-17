@@ -1,6 +1,7 @@
-package com.cn.guojinhu.dota2book.utils;
+package com.cn.guojinhu.dota2book.utils.glide;
 
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.support.annotation.DrawableRes;
 import android.widget.ImageView;
 
@@ -44,5 +45,28 @@ public class BitmapUtils {
 //                .override(300,150)
                 .centerCrop()
                 .into(imageView);
+    }
+
+
+
+
+    public int calculateInSampleSizeForArtwork(BitmapFactory.Options options,
+                                               int reqWidth, int reqHeight) {
+        // Raw height and width of image
+        final int height = options.outHeight;
+        final int width = options.outWidth;
+        int inSampleSize = 1;
+
+        if (height > reqHeight || width > reqWidth) {
+
+            final int halfHeight = height / 2;
+            final int halfWidth = width / 2;
+
+            while ((halfHeight / inSampleSize) > reqHeight
+                    && (halfWidth / inSampleSize) > reqWidth) {
+                inSampleSize *= 2;
+            }
+        }
+        return inSampleSize;
     }
 }

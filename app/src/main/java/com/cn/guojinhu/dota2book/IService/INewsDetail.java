@@ -1,9 +1,7 @@
 package com.cn.guojinhu.dota2book.IService;
 
-import com.cn.guojinhu.dota2book.bean.NewsBean;
 import com.cn.guojinhu.dota2book.bean.NewsDetail;
-import com.cn.guojinhu.dota2book.utils.Docid;
-import com.squareup.okhttp.ResponseBody;
+import com.cn.guojinhu.dota2book.utils.retrofit.Docid;
 
 import java.util.Map;
 

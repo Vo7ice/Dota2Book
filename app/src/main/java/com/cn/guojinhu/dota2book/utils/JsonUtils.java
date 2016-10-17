@@ -4,8 +4,9 @@ import android.content.Context;
 import android.support.annotation.NonNull;
 
 import com.cn.guojinhu.dota2book.bean.Equipments;
-import com.cn.guojinhu.dota2book.bean.Heroes;
+import com.cn.guojinhu.dota2book.bean.Hero;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -22,12 +23,11 @@ public class JsonUtils {
     public static final String KEY_HEROESLIST_FILE_NAME = "Heroes.json";
     public static final String KEY_EQUIPMENT_FILE_NAME = "";
 
-    public static List<Heroes.Hero> getHeroesFromAssets(Context context) throws IOException {
+    public static List<Hero> getHeroesFromAssets(Context context) throws IOException {
         InputStream is = context.getAssets().open(KEY_HEROESLIST_FILE_NAME);
         String result = getJsonString(is);
         Gson gson = new Gson();
-        Heroes heroes = gson.fromJson(result, Heroes.class);
-        return heroes.Heroes;
+        return gson.fromJson(result,new TypeToken<List<Hero>>(){}.getType());
     }
 
     public static List<Equipments.Equipment> getEquipmentFromAssets(Context context) throws IOException{

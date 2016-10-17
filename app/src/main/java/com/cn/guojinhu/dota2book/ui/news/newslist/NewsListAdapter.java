@@ -3,7 +3,6 @@ package com.cn.guojinhu.dota2book.ui.news.newslist;
 import android.content.Context;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +12,7 @@ import android.widget.TextView;
 import com.cn.guojinhu.dota2book.R;
 import com.cn.guojinhu.dota2book.base.BaseAdapter;
 import com.cn.guojinhu.dota2book.bean.News;
-import com.cn.guojinhu.dota2book.utils.BitmapUtils;
+import com.cn.guojinhu.dota2book.utils.glide.BitmapUtils;
 import com.cn.guojinhu.dota2book.view.CircleIndicator;
 
 import java.util.List;

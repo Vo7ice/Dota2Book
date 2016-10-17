@@ -8,15 +8,15 @@ import android.view.View;
 
 import com.cn.guojinhu.dota2book.R;
 import com.cn.guojinhu.dota2book.base.BaseFragment;
-import com.cn.guojinhu.dota2book.bean.Heroes;
+import com.cn.guojinhu.dota2book.bean.Hero;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import rx.Observable;
-import rx.Observer;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -30,7 +30,7 @@ public class HeroesFragment extends BaseFragment implements HeroesContact.View {
     private static final String TAG="HeroesFragment";
 
     private HeroesPresenter mPresenter;
-    private List<Heroes.Hero> mHeroList;
+    private List<Hero> mHeroList;
     private RecyclerView mRecyclerView;
     private GridLayoutManager mLayoutManager;
     private HeroListAdapter mAdapter;
@@ -59,7 +59,7 @@ public class HeroesFragment extends BaseFragment implements HeroesContact.View {
 
     @Override
     public void initData() {
-        mAdapter = new HeroListAdapter(new ArrayList<Heroes.Hero>(), getActivity());
+        mAdapter = new HeroListAdapter(new ArrayList<Hero>(), getActivity());
         mLayoutManager = new GridLayoutManager(getActivity(), 3, GridLayoutManager.VERTICAL, false);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
@@ -71,37 +71,28 @@ public class HeroesFragment extends BaseFragment implements HeroesContact.View {
     }
 
     private void getHeroList(){
-        Observable.create(new Observable.OnSubscribe<List<Heroes.Hero>>() {
+        Observable.create(new Observable.OnSubscribe<List<Hero>>() {
             @Override
-            public void call(Subscriber<? super List<Heroes.Hero>> subscriber) {
+            public void call(Subscriber<? super List<Hero>> subscriber) {
 
-                List<Heroes.Hero> list=mPresenter.getHeroList(getActivity());
+                List<Hero> list=mPresenter.getHeroList(getActivity());
                 subscriber.onNext(list);
                 subscriber.onCompleted();
             }
         })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<List<Heroes.Hero>>() {
+                .subscribe(new Action1<List<Hero>>() {
                     @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onNext(List<Heroes.Hero> heros) {
-                        mHeroList=heros;
-                        if (null != heros && !heros.isEmpty()) {
-                            mAdapter.replaceData(heros);
+                    public void call(List<Hero> heroes) {
+                        mHeroList=heroes;
+                        if (null != heroes && !heroes.isEmpty()) {
+                            mAdapter.replaceData(heroes);
                         }
-                        Log.i(TAG,"get heros success");
+                        Log.i(TAG,"get heroes success");
                     }
                 });
+
     }
 
 }

@@ -3,7 +3,7 @@ package com.cn.guojinhu.dota2book.ui.heroes;
 import android.content.Context;
 import android.util.Log;
 
-import com.cn.guojinhu.dota2book.bean.Heroes;
+import com.cn.guojinhu.dota2book.bean.Hero;
 import com.cn.guojinhu.dota2book.utils.JsonUtils;
 
 import java.io.IOException;
@@ -29,7 +29,7 @@ public class HeroesPresenter implements HeroesContact.Presenter {
 
     }
 
-    public List<Heroes.Hero> getHeroList(Context context) {
+    public List<Hero> getHeroList(Context context) {
         try {
             return JsonUtils.getHeroesFromAssets(context);
         } catch (IOException e) {
