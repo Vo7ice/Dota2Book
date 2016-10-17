@@ -1,6 +1,7 @@
 package com.cn.guojinhu.dota2book.ui.heroes;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -40,7 +41,7 @@ public class HeroListAdapter extends BaseAdapter<Heroes.Hero> {
     }
 
     @Override
-    public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+    public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         final Heroes.Hero hero = t.get(position);
         if (holder instanceof HeroHolder) {
             final HeroHolder heroHolder = (HeroHolder) holder;
@@ -49,6 +50,17 @@ public class HeroListAdapter extends BaseAdapter<Heroes.Hero> {
             /*BitmapUtils.displayRoundImage(mContext,
                     ((HeroHolder) holder).image_avatar, Dota2Apis.BASE_URL + hero.HoverSmall);*/
             BitmapUtils.display(mContext, heroHolder.image_avatar, Dota2Apis.BASE_URL + hero.HoverLarge);
+
+            heroHolder.image_avatar.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent=new Intent(mContext,HeroesDetailsActivity.class);
+                    intent.putExtra("position",position);
+                    mContext.startActivity(intent);
+                }
+            });
+
+
             Log.i(TAG,"中文名： "+hero.cname+"english name :"+hero.name);
 
         }

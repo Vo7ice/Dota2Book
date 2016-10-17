@@ -34,4 +34,8 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<RecyclerView.V
         this.t.addAll(t);
         notifyDataSetChanged();
     }
+
+    public List<T> getT(){
+        return t;
+    }
 }

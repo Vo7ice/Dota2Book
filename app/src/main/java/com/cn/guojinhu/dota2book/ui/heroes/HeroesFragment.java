@@ -14,9 +14,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import rx.Observable;
-import rx.Observer;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
 import rx.schedulers.Schedulers;
 
 import static com.google.common.base.Preconditions.checkNotNull;
@@ -82,19 +82,9 @@ public class HeroesFragment extends BaseFragment implements HeroesContact.View {
         })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Observer<List<Heroes.Hero>>() {
+                .subscribe(new Action1<List<Heroes.Hero>>() {
                     @Override
-                    public void onCompleted() {
-
-                    }
-
-                    @Override
-                    public void onError(Throwable e) {
-
-                    }
-
-                    @Override
-                    public void onNext(List<Heroes.Hero> heros) {
+                    public void call(List<Heroes.Hero> heros) {
                         mHeroList=heros;
                         if (null != heros && !heros.isEmpty()) {
                             mAdapter.replaceData(heros);
@@ -102,6 +92,7 @@ public class HeroesFragment extends BaseFragment implements HeroesContact.View {
                         Log.i(TAG,"get heros success");
                     }
                 });
+
     }
 
 }

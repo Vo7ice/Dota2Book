@@ -10,7 +10,7 @@ public class Heroes {
 
     public List<Hero> Heroes;
 
-    public class Hero{
+    public class Hero {
         public String name;
         public String cname;
         public String HoverLarge;

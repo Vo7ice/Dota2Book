@@ -11,16 +11,10 @@ import com.cn.guojinhu.dota2book.bean.NewsBean;
 import com.cn.guojinhu.dota2book.commons.Apis;
 import com.cn.guojinhu.dota2book.ui.news.newslist.NewsListFragment;
 import com.cn.guojinhu.dota2book.utils.ServiceGenerator;
-import com.google.gson.Gson;
-import com.squareup.okhttp.ResponseBody;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import retrofit.Callback;
-import retrofit.Response;
-import retrofit.Retrofit;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;
