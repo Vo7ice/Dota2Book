@@ -1,6 +1,7 @@
 package com.cn.guojinhu.dota2book.utils;
 
 import com.cn.guojinhu.dota2book.commons.Apis;
+import com.cn.guojinhu.dota2book.utils.retrofit.CustomConverterFactory;
 import com.squareup.okhttp.OkHttpClient;
 
 import retrofit.GsonConverterFactory;

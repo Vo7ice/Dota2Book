@@ -1,20 +1,16 @@
 package com.cn.guojinhu.dota2book.ui.news.newsdetail;
 
 import android.content.Context;
-import android.util.Log;
 import android.widget.ImageView;
 
 import com.cn.guojinhu.dota2book.IService.INewsDetail;
 import com.cn.guojinhu.dota2book.bean.NewsDetail;
 import com.cn.guojinhu.dota2book.commons.Apis;
-import com.cn.guojinhu.dota2book.utils.BitmapUtils;
+import com.cn.guojinhu.dota2book.utils.glide.BitmapUtils;
 import com.cn.guojinhu.dota2book.utils.ServiceGenerator;
 
 import java.util.Map;
 
-import retrofit.Callback;
-import retrofit.Response;
-import retrofit.Retrofit;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.schedulers.Schedulers;

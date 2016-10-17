@@ -41,7 +41,7 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.heroes.HeroesDetailsActivity"></activity>
+        <activity android:name=".ui.heroes.detail.HeroesDetailsActivity"></activity>
     </application>
 
 </manifest>

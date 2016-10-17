@@ -12,9 +12,10 @@ import android.widget.TextView;
 
 import com.cn.guojinhu.dota2book.R;
 import com.cn.guojinhu.dota2book.base.BaseAdapter;
-import com.cn.guojinhu.dota2book.bean.Heroes;
+import com.cn.guojinhu.dota2book.bean.Hero;
 import com.cn.guojinhu.dota2book.commons.Dota2Apis;
-import com.cn.guojinhu.dota2book.utils.BitmapUtils;
+import com.cn.guojinhu.dota2book.ui.heroes.detail.HeroesDetailsActivity;
+import com.cn.guojinhu.dota2book.utils.glide.BitmapUtils;
 
 import java.util.List;
 
@@ -22,10 +23,10 @@ import java.util.List;
  * Created by guojin.hu on 2016/9/18.
  */
 
-public class HeroListAdapter extends BaseAdapter<Heroes.Hero> {
+public class HeroListAdapter extends BaseAdapter<Hero> {
     private static final String TAG="HeroListAdapter";
 
-    public HeroListAdapter(List<Heroes.Hero> t, Context mContext) {
+    public HeroListAdapter(List<Hero> t, Context mContext) {
         super(t, mContext);
     }
 
@@ -42,7 +43,7 @@ public class HeroListAdapter extends BaseAdapter<Heroes.Hero> {
 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
-        final Heroes.Hero hero = t.get(position);
+        final Hero hero = t.get(position);
         if (holder instanceof HeroHolder) {
             final HeroHolder heroHolder = (HeroHolder) holder;
             heroHolder.text_name.setText(hero.name.replace("_","").trim());

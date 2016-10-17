@@ -1,4 +1,4 @@
-package com.cn.guojinhu.dota2book.ui.heroes;
+package com.cn.guojinhu.dota2book.ui.heroes.detail;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -12,7 +12,7 @@ import android.widget.TextView;
 import com.cn.guojinhu.dota2book.IService.IDota2HeroService;
 import com.cn.guojinhu.dota2book.R;
 import com.cn.guojinhu.dota2book.base.BaseActivity;
-import com.cn.guojinhu.dota2book.bean.Heroes;
+import com.cn.guojinhu.dota2book.bean.Hero;
 import com.cn.guojinhu.dota2book.utils.ImageLoader;
 import com.cn.guojinhu.dota2book.utils.JsonUtils;
 import com.cn.guojinhu.dota2book.view.ZoomView;
@@ -36,7 +36,7 @@ public class HeroesDetailsActivity extends BaseActivity  {
     private TextView mTextView;
 
 
-    private List<Heroes.Hero> mData=new ArrayList<>();
+    private List<Hero> mData=new ArrayList<>();
 
     private ViewPagerAdapter mAdapter;
 
@@ -126,17 +126,17 @@ public class HeroesDetailsActivity extends BaseActivity  {
     private void getDataAll(){
 
         Observable.just("")
-                .flatMap(new Func1<String, Observable<Heroes.Hero>>() {
+                .flatMap(new Func1<String, Observable<Hero>>() {
                     @Override
-                    public Observable<Heroes.Hero> call(String s) {
-                        List<Heroes.Hero> list=null;
+                    public Observable<Hero> call(String s) {
+                        List<Hero> list=null;
                         try {
                             list=JsonUtils.getHeroesFromAssets(HeroesDetailsActivity.this);
                         } catch (IOException e) {
                             e.printStackTrace();
                         }
                         if(null!=list){
-                            final List<Heroes.Hero> finalList = list;
+                            final List<Hero> finalList = list;
                             runOnUiThread(new Runnable() {
                                 @Override
                                 public void run() {
@@ -150,9 +150,9 @@ public class HeroesDetailsActivity extends BaseActivity  {
                 })
 
 
-                .map(new Func1<Heroes.Hero, Map<String,Bitmap>>() {
+                .map(new Func1<Hero, Map<String,Bitmap>>() {
                     @Override
-                    public Map<String,Bitmap> call(Heroes.Hero hero) {
+                    public Map<String,Bitmap> call(Hero hero) {
                         return mImageLoader.getMapByHoverLarge(hero.HoverLarge);
                     }
                 })

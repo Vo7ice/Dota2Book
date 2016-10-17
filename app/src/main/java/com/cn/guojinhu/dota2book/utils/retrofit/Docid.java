@@ -1,4 +1,4 @@
-package com.cn.guojinhu.dota2book.utils;
+package com.cn.guojinhu.dota2book.utils.retrofit;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;

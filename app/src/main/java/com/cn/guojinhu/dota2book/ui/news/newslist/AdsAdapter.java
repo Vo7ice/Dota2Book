@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.cn.guojinhu.dota2book.R;
 import com.cn.guojinhu.dota2book.bean.News;
-import com.cn.guojinhu.dota2book.utils.BitmapUtils;
+import com.cn.guojinhu.dota2book.utils.glide.BitmapUtils;
 
 /**
  * Created by guojin.hu on 2016/8/16.

@@ -1,4 +1,4 @@
-package com.cn.guojinhu.dota2book.utils;
+package com.cn.guojinhu.dota2book.utils.glide;
 
 import android.content.Context;
 import android.graphics.Bitmap;

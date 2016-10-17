@@ -1,4 +1,4 @@
-package com.cn.guojinhu.dota2book.utils;
+package com.cn.guojinhu.dota2book.utils.retrofit;
 
 import com.google.gson.Gson;
 import com.google.gson.TypeAdapter;
