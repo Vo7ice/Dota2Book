@@ -4,12 +4,13 @@ import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.TextView;
 
-import com.cn.guojinhu.dota2book.IService.IDota2HeroService;
 import com.cn.guojinhu.dota2book.R;
 import com.cn.guojinhu.dota2book.base.BaseActivity;
 import com.cn.guojinhu.dota2book.bean.Hero;
@@ -20,7 +21,6 @@ import com.cn.guojinhu.dota2book.view.ZoomView;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import rx.Observable;
 import rx.android.schedulers.AndroidSchedulers;
@@ -42,26 +42,15 @@ public class HeroesDetailsActivity extends BaseActivity  {
 
     private int position;
 
-    private int viewPagerWieht;
-    private int viewPagerHeight;
-
     private ImageLoader mImageLoader =ImageLoader.getIntance();
-
-
-    private IDota2HeroService service;
 
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         super.onCreate(savedInstanceState);
-//        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_heroes_details);
-
-        initViews();
-        initData();
-        initListener();
-
     }
 
     @Override
@@ -111,8 +100,6 @@ public class HeroesDetailsActivity extends BaseActivity  {
         position=getIntent().getIntExtra("position",0);
 
         getDataAll();
-        mViewPager.setCurrentItem(position);
-
     }
 
     private void setText(int position,int size){
@@ -125,68 +112,58 @@ public class HeroesDetailsActivity extends BaseActivity  {
 
     private void getDataAll(){
 
-        Observable.just("")
-                .flatMap(new Func1<String, Observable<Hero>>() {
-                    @Override
-                    public Observable<Hero> call(String s) {
-                        List<Hero> list=null;
-                        try {
-                            list=JsonUtils.getHeroesFromAssets(HeroesDetailsActivity.this);
-                        } catch (IOException e) {
-                            e.printStackTrace();
+        try {
+            Observable.from(JsonUtils.getHeroesFromAssets(HeroesDetailsActivity.this))
+                    .map(new Func1<Hero, Hero>() {
+                        @Override
+                        public Hero call(Hero hero) {
+                            Log.i("hqq","map  "+hero.toString());
+                            return mImageLoader.getBitmapByHoverLarge(hero);
                         }
-                        if(null!=list){
-                            final List<Hero> finalList = list;
-                            runOnUiThread(new Runnable() {
-                                @Override
-                                public void run() {
-                                    mData= finalList;
-                                    mAdapter.notifyDataSetChanged();
-                                }
-                            });
-                        }
-                        return Observable.from(list);
-                    }
-                })
+                    })
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Action1<Hero>() {
+
+                        @Override
+                        public void call(Hero hero) {
+                            Log.i("hqq",mData.size()+"\t"+hero.cname);
+
+                            setText(position,mData.size());
+
+                            if(!mData.contains(hero)){
+                                mData.add(hero);
+                                mAdapter.notifyDataSetChanged();
+                            }
+
+                            if(mData.size()>position){
+                                mViewPager.setCurrentItem(position);
+                                mAdapter.notifyDataSetChanged();
+                            }
 
 
-                .map(new Func1<Hero, Map<String,Bitmap>>() {
-                    @Override
-                    public Map<String,Bitmap> call(Hero hero) {
-                        return mImageLoader.getMapByHoverLarge(hero.HoverLarge);
-                    }
-                })
-                .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<Map<String,Bitmap>>() {
-                    @Override
-                    public void call(Map<String,Bitmap> map) {
-                        if(!map.isEmpty()){
-                            ImageLoader.getIntance().putBitMapCache(map);
-                            mAdapter.notifyDataSetChanged();
                         }
-                    }
-                });
+                    });
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
-    private void getDataByHoverLarge(final String HoverLarge){
+    private void getDataByHoverLarge(Hero hero){
 
-        Observable.just(HoverLarge)
-                .map(new Func1<String, Map<String,Bitmap>>() {
+        Observable.just(hero)
+                .map(new Func1<Hero, Hero>() {
                     @Override
-                    public Map<String, Bitmap> call(String s) {
-                        return mImageLoader.getMapByHoverLarge(HoverLarge);
+                    public Hero call(Hero hero) {
+                        return mImageLoader.getBitmapByHoverLarge(hero);
                     }
                 })
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(new Action1<Map<String,Bitmap>>() {
+                .subscribe(new Action1<Hero>() {
                     @Override
-                    public void call(Map<String,Bitmap> map) {
-                        if(null!=map){
-                            ImageLoader.getIntance().putBitMapCache(map);
-                            mAdapter.notifyDataSetChanged();
-                        }
+                    public void call(Hero hero) {
+                        mAdapter.notifyDataSetChanged();
                     }
                 });
     }
@@ -223,15 +200,14 @@ public class HeroesDetailsActivity extends BaseActivity  {
 
     private void setBitmap(ZoomView zoomView,int position) {
 
-        String sHoverLarge=mData.get(position).HoverLarge;
-        Bitmap bitmap= ImageLoader.getIntance().getBitMapByKey(sHoverLarge);
+        Hero hero=mData.get(position);
+        Bitmap bitmap= ImageLoader.getIntance().getBitmapByKey(hero.HoverLarge);
 
+        Log.i("hqq",(bitmap!=null)+"");
         if(null!=bitmap){
             zoomView.setImageBitmap(bitmap);
         }else{
-            getDataByHoverLarge(sHoverLarge);
+            getDataByHoverLarge(hero);
         }
     }
-
-
 }
