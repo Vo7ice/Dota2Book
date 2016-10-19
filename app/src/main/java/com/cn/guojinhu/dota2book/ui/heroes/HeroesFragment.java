@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import rx.Observable;
-import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
 import rx.functions.Action1;
 import rx.schedulers.Schedulers;
@@ -71,15 +70,8 @@ public class HeroesFragment extends BaseFragment implements HeroesContact.View {
     }
 
     private void getHeroList(){
-        Observable.create(new Observable.OnSubscribe<List<Hero>>() {
-            @Override
-            public void call(Subscriber<? super List<Hero>> subscriber) {
 
-                List<Hero> list=mPresenter.getHeroList(getActivity());
-                subscriber.onNext(list);
-                subscriber.onCompleted();
-            }
-        })
+        Observable.just(mPresenter.getHeroList(getActivity()))
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Action1<List<Hero>>() {
@@ -89,10 +81,9 @@ public class HeroesFragment extends BaseFragment implements HeroesContact.View {
                         if (null != heroes && !heroes.isEmpty()) {
                             mAdapter.replaceData(heroes);
                         }
-                        Log.i(TAG,"get heroes success");
+                        Log.i("hqq","getHeroList"+"\t"+mHeroList.size());
                     }
                 });
-
     }
 
 }

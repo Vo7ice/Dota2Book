@@ -260,7 +260,10 @@ public class ZoomView extends View {
             case STATUS_INIT:
                 initBitmap(canvas);
             default:
-                canvas.drawBitmap(sourceBitmap, matrix, null);
+                if(null!=sourceBitmap){
+                    canvas.drawBitmap(sourceBitmap, matrix, null);
+                }
+
                 break;
         }
     }
