@@ -28,7 +28,7 @@ public class NewsListAdapter extends BaseAdapter<News> {
     //private List<News> mNewsList;
     //private Context mContext;
     private AdsAdapter mAdapter;
-    private OnItemClickListener mListener;
+    private OnNewsItemClickListener mListener;
 
     private static final int NORMAL = 0;
     private static final int PHOTO_SET = 1;
@@ -42,7 +42,7 @@ public class NewsListAdapter extends BaseAdapter<News> {
         super(newsList, context);
     }
 
-    public NewsListAdapter(List<News> newsList, Context context, OnItemClickListener listener) {
+    public NewsListAdapter(List<News> newsList, Context context, OnNewsItemClickListener listener) {
         super(newsList, context);
         this.mListener = listener;
     }
@@ -188,7 +188,7 @@ public class NewsListAdapter extends BaseAdapter<News> {
         notifyDataSetChanged();
     }*/
 
-    public void setOnItemClickListener(OnItemClickListener listener) {
+    public void setOnItemClickListener(OnNewsItemClickListener listener) {
         this.mListener = listener;
     }
 

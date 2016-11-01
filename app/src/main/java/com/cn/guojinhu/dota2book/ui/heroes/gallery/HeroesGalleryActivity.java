@@ -1,4 +1,4 @@
-package com.cn.guojinhu.dota2book.ui.heroes.detail;
+package com.cn.guojinhu.dota2book.ui.heroes.gallery;
 
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -28,7 +28,7 @@ import rx.functions.Action1;
 import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
-public class HeroesDetailsActivity extends BaseActivity  {
+public class HeroesGalleryActivity extends BaseActivity  {
 
 
     private ViewPager mViewPager;
@@ -75,7 +75,7 @@ public class HeroesDetailsActivity extends BaseActivity  {
     @Override
     public void initListener() {
 
-        mViewPager.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+        mViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
 
@@ -113,7 +113,7 @@ public class HeroesDetailsActivity extends BaseActivity  {
     private void getDataAll(){
 
         try {
-            Observable.from(JsonUtils.getHeroesFromAssets(HeroesDetailsActivity.this))
+            Observable.from(JsonUtils.getHeroesFromAssets(HeroesGalleryActivity.this))
                     .map(new Func1<Hero, Hero>() {
                         @Override
                         public Hero call(Hero hero) {
@@ -172,7 +172,7 @@ public class HeroesDetailsActivity extends BaseActivity  {
 
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
-            ZoomView zoomView= (ZoomView) LayoutInflater.from(HeroesDetailsActivity.this).inflate(R.layout.item_heroes_details,null);
+            ZoomView zoomView= (ZoomView) LayoutInflater.from(HeroesGalleryActivity.this).inflate(R.layout.item_heroes_details,null);
 
             setBitmap(zoomView,position);
 

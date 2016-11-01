@@ -10,6 +10,7 @@
     <string name="news_list_img">NewsListImg</string>
     <string name="title_activity_news_detail">NewsDetailActivity</string>
     <string name="title_activity_photo_set">PhotoSetActivity</string>
+    <string name="title_activity_heroes_gallery">HeroesGalleryActivity</string>
     <string name="section_format">Hello World from section: %1$d</string>
 
     <string name="tag_heroes">英雄</string>

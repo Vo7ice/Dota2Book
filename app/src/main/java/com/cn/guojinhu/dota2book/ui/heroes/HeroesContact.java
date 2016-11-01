@@ -15,10 +15,12 @@ import java.util.List;
 public class HeroesContact {
     public interface View extends BaseView<Presenter> {
 
+        void openHeroDetail(Hero hero);
     }
 
     public interface Presenter extends BasePresenter {
         List<Hero> getHeroList(Context context);
 
+        void showHeroDetail(Hero hero);
     }
 }

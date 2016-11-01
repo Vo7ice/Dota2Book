@@ -3,7 +3,6 @@ package com.cn.guojinhu.dota2book.ui.heroes;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,7 +13,7 @@ import com.cn.guojinhu.dota2book.R;
 import com.cn.guojinhu.dota2book.base.BaseAdapter;
 import com.cn.guojinhu.dota2book.bean.Hero;
 import com.cn.guojinhu.dota2book.commons.Dota2Apis;
-import com.cn.guojinhu.dota2book.ui.heroes.detail.HeroesDetailsActivity;
+import com.cn.guojinhu.dota2book.ui.heroes.gallery.HeroesGalleryActivity;
 import com.cn.guojinhu.dota2book.utils.glide.BitmapUtils;
 
 import java.util.List;
@@ -24,10 +23,12 @@ import java.util.List;
  */
 
 public class HeroListAdapter extends BaseAdapter<Hero> {
-    private static final String TAG="HeroListAdapter";
+    private static final String TAG = "HeroListAdapter";
+    private OnHeroesItemClickListener mListener;
 
-    public HeroListAdapter(List<Hero> t, Context mContext) {
+    public HeroListAdapter(List<Hero> t, Context mContext, OnHeroesItemClickListener listener) {
         super(t, mContext);
+        mListener = listener;
     }
 
     //private List<Heroes.Hero> mHeroList;
@@ -46,24 +47,24 @@ public class HeroListAdapter extends BaseAdapter<Hero> {
         final Hero hero = t.get(position);
         if (holder instanceof HeroHolder) {
             final HeroHolder heroHolder = (HeroHolder) holder;
-            heroHolder.text_name.setText(hero.name.replace("_","").trim());
+            heroHolder.text_name.setText(hero.name);
             heroHolder.text_cname.setText(hero.cname);
             /*BitmapUtils.displayRoundImage(mContext,
                     ((HeroHolder) holder).image_avatar, Dota2Apis.BASE_URL + hero.HoverSmall);*/
-            BitmapUtils.display(mContext, heroHolder.image_avatar, Dota2Apis.BASE_URL + hero.HoverLarge);
+            BitmapUtils.displayRoundImage(mContext, heroHolder.image_avatar,
+                    Dota2Apis.BASE_URL + hero.HoverLarge);
 
             heroHolder.image_avatar.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent=new Intent(mContext,HeroesDetailsActivity.class);
-                    intent.putExtra("position",position);
+                    Intent intent = new Intent(mContext, HeroesGalleryActivity.class);
+                    intent.putExtra("position", position);
                     mContext.startActivity(intent);
+//                    if (null != mListener){
+//                        mListener.onHeroDetail(hero);
+//                    }
                 }
             });
-
-
-            Log.i(TAG,"中文名： "+hero.cname+"english name :"+hero.name);
-
         }
     }
 

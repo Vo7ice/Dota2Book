@@ -2,6 +2,7 @@ package com.cn.guojinhu.dota2book.ui.heroes;
 
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.GridLayoutManager;
+import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.View;
@@ -31,8 +32,10 @@ public class HeroesFragment extends BaseFragment implements HeroesContact.View {
     private HeroesPresenter mPresenter;
     private List<Hero> mHeroList;
     private RecyclerView mRecyclerView;
-    private GridLayoutManager mLayoutManager;
+    //private GridLayoutManager mLayoutManager;
+    private LinearLayoutManager mLayoutManager;
     private HeroListAdapter mAdapter;
+    private OnHeroesItemClickListener mListener;
 
     @Override
     protected int getLayoutId() {
@@ -53,13 +56,19 @@ public class HeroesFragment extends BaseFragment implements HeroesContact.View {
 
     @Override
     public void initListener() {
-
+        mListener = new OnHeroesItemClickListener() {
+            @Override
+            public void onHeroDetail(Hero hero) {
+                mPresenter.showHeroDetail(hero);
+            }
+        };
     }
 
     @Override
     public void initData() {
-        mAdapter = new HeroListAdapter(new ArrayList<Hero>(), getActivity());
-        mLayoutManager = new GridLayoutManager(getActivity(), 3, GridLayoutManager.VERTICAL, false);
+        mAdapter = new HeroListAdapter(new ArrayList<Hero>(), getActivity(),mListener);
+        //mLayoutManager = new GridLayoutManager(getActivity(), 3, GridLayoutManager.VERTICAL, false);
+        mLayoutManager = new LinearLayoutManager(getActivity(),LinearLayoutManager.VERTICAL,false);
         mRecyclerView.setLayoutManager(mLayoutManager);
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setItemAnimator(new DefaultItemAnimator());
@@ -86,4 +95,8 @@ public class HeroesFragment extends BaseFragment implements HeroesContact.View {
                 });
     }
 
+    @Override
+    public void openHeroDetail(Hero hero) {
+
+    }
 }

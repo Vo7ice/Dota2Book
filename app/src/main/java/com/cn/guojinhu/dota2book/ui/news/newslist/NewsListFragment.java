@@ -38,7 +38,7 @@ public class NewsListFragment extends BaseFragment implements NewsContact.ViewLi
     private int pageIndex = 0;
     private Channel mChannel;
     private LinearLayoutManager mLayoutManager;
-    private OnItemClickListener mListener;
+    private OnNewsItemClickListener mListener;
 
     private static final String DETAIL = "com.cn.guojinhu.newsdetail";
     private static final String PHOTO_SET = "com.cn.guojinhu.photoset";
@@ -68,7 +68,7 @@ public class NewsListFragment extends BaseFragment implements NewsContact.ViewLi
 
     @Override
     public void initListener() {
-        mListener = new OnItemClickListener() {
+        mListener = new OnNewsItemClickListener() {
             @Override
             public void onNewsDetail(News news) {
                 mPresenter.openNews(news);
