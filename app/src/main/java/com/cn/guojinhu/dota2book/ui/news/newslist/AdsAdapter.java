@@ -21,14 +21,14 @@ public class AdsAdapter extends PagerAdapter {
 
     private News mNews;
     private Context mContext;
-    private OnItemClickListener mListener;
+    private OnNewsItemClickListener mListener;
 
     public AdsAdapter(News news, Context context) {
         this.mNews = news;
         this.mContext = context;
     }
 
-    public AdsAdapter(News news, Context context, OnItemClickListener listener) {
+    public AdsAdapter(News news, Context context, OnNewsItemClickListener listener) {
         this.mNews = news;
         this.mContext = context;
         this.mListener = listener;

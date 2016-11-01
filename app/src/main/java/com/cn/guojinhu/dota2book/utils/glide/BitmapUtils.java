@@ -38,7 +38,7 @@ public class BitmapUtils {
 
     public static void displayRoundImage(Context context, ImageView imageView, String url) {
         Glide.with(context).load(url)
-                //.transform(new GlideRoundTransform(context))
+                .transform(new GlideRoundTransform(context))
                 .placeholder(R.drawable.ic_photo_size_select_actual_black_24dp)
 //                .error(R.drawable.ic_error)
                 .crossFade()
@@ -48,10 +48,7 @@ public class BitmapUtils {
     }
 
 
-
-
-    public int calculateInSampleSizeForArtwork(BitmapFactory.Options options,
-                                               int reqWidth, int reqHeight) {
+    public int calculateInSampleSizeForArtwork(BitmapFactory.Options options, int reqWidth, int reqHeight) {
         // Raw height and width of image
         final int height = options.outHeight;
         final int width = options.outWidth;

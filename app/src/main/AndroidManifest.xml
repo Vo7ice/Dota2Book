@@ -41,7 +41,15 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.heroes.detail.HeroesDetailsActivity"></activity>
+        <activity
+            android:name=".ui.heroes.gallery.HeroesGalleryActivity"
+            android:label="@string/title_activity_heroes_gallery">
+            <intent-filter>
+                <action android:name="com.cn.guojinhu.heroesgallery" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>

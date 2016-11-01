@@ -39,4 +39,9 @@ public class HeroesPresenter implements HeroesContact.Presenter {
         return null;
     }
 
+    @Override
+    public void showHeroDetail(Hero hero) {
+        baseView.openHeroDetail(hero);
+    }
+
 }

@@ -19,15 +19,15 @@ import java.io.InputStream;
 
 public class ImageLoader {
 
-    private LruCache<String,Bitmap> mCache;
+    private LruCache<String, Bitmap> mCache;
 
     private static ImageLoader intance;
 
-    public static ImageLoader getIntance(){
-        if(null==intance){
-            synchronized (ImageLoader.class){
-                if(null==intance){
-                    intance=new ImageLoader();
+    public static ImageLoader getIntance() {
+        if (null == intance) {
+            synchronized (ImageLoader.class) {
+                if (null == intance) {
+                    intance = new ImageLoader();
                 }
             }
         }
@@ -36,8 +36,8 @@ public class ImageLoader {
 
     public ImageLoader() {
 
-        int mexMemory=(int)Runtime.getRuntime().maxMemory();
-        mCache=new LruCache<String, Bitmap>(mexMemory/8){
+        int mexMemory = (int) Runtime.getRuntime().maxMemory();
+        mCache = new LruCache<String, Bitmap>(mexMemory / 8) {
             @Override
             protected int sizeOf(String key, Bitmap value) {
                 return value.getByteCount();
@@ -46,29 +46,28 @@ public class ImageLoader {
 
     }
 
-    public void putBitMapCache(String key,Bitmap bitmap){
-        mCache.put(key,bitmap);
+    public void putBitMapCache(String key, Bitmap bitmap) {
+        mCache.put(key, bitmap);
     }
 
 
-
-    public Bitmap getBitmapByKey(String key){
+    public Bitmap getBitmapByKey(String key) {
         return mCache.get(key);
     }
 
 
-    public Hero getBitmapByHoverLarge(Hero hero){
+    public Hero getBitmapByHoverLarge(Hero hero) {
 
-        OkHttpClient client=new OkHttpClient();
-        Request request=new Request.Builder().url(Dota2Apis.BASE_URL + hero.HoverLarge).build();
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder().url(Dota2Apis.BASE_URL + hero.HoverLarge.replace("hphover", "full")).build();
         Call call = client.newCall(request);
-        InputStream is=null;
-        Bitmap bitmap=null;
+        InputStream is = null;
+        Bitmap bitmap = null;
 
         try {
-            is=call.execute().body().byteStream();
-            bitmap= BitmapFactory.decodeStream(is);
-            if(null!=bitmap) {
+            is = call.execute().body().byteStream();
+            bitmap = BitmapFactory.decodeStream(is);
+            if (null != bitmap) {
                 mCache.put(hero.HoverLarge, bitmap);
             }
         } catch (IOException e) {
